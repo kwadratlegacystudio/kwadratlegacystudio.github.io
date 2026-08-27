@@ -28,8 +28,11 @@
   --scrim:       rgba(6,10,9,.72);
   --select:      rgba(197,151,7,.28);
 
-  --serif:   "EB Garamond", Garamond, Georgia, "Times New Roman", serif;
-  --display: "Cormorant SC", "Cormorant Garamond", Garamond, Georgia, serif;
+  /* Latin glyphs come from the Garamond; Hebrew and Yiddish fall
+     through to Noto Serif Hebrew, which the Garamonds do not cover.
+     The browser chooses per character, so one stack serves both. */
+  --serif:   "EB Garamond", "Noto Serif Hebrew", Garamond, Georgia, "Times New Roman", serif;
+  --display: "Cormorant SC", "Noto Serif Hebrew", "Cormorant Garamond", Garamond, Georgia, serif;
 
   --ease:  cubic-bezier(.22,.61,.36,1);
   --slow:  1100ms;
@@ -763,6 +766,15 @@ img{ max-width:100%; display:block; }
   .works-foot{ justify-content:center; }
   .rail-arrow{ display:none; }
   .colophon{ font-size:9.5px; padding-bottom:14px; }
+}
+
+/* On a phone the wordmark and the navigation fight for one line and
+   both lose. The gold K carries the studio on its own at this size. */
+@media (max-width:560px){
+  .mark-words{ display:none; }
+  .mark-glyph{ width:34px; height:34px; }
+  .compass{ gap:clamp(16px,5vw,26px); }
+  .compass a{ font-size:11px; letter-spacing:.18em; }
 }
 
 @media (max-width:640px){
