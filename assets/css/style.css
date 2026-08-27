@@ -874,3 +874,44 @@ img{ max-width:100%; display:block; }
 .works-index li{ margin-bottom:.35em; }
 .works-index p{ margin-bottom:.9em; line-height:1.7; }
 html.js .works-index{ display:none; }
+
+/* ── Reading size on a phone ──────────────────────────────────────
+   The small tracked capitals that look composed on a large screen
+   fall to 8.5–11px on a handset, where wide letter-spacing thins the
+   strokes further and the type stops being readable. Everything small
+   is raised, and the tracking eased, below 640px.
+   ──────────────────────────────────────────────────────────────── */
+
+@media (max-width:640px){
+  body{ font-size:17px; }
+
+  .compass a,
+  .ledger-tab      { font-size:13px; letter-spacing:.16em; }
+  .eyebrow         { font-size:12px; letter-spacing:.26em; }
+  .hint            { font-size:13px; }
+  .tally           { font-size:12px; letter-spacing:.20em; }
+  .colophon        { font-size:11.5px; }
+  .plate-mark      { font-size:12.5px; letter-spacing:.16em; }
+
+  .door-source     { font-size:11.5px; letter-spacing:.20em; }
+  .door-title      { font-size:17px; line-height:1.3; }
+
+  .reading-source  { font-size:12px; letter-spacing:.22em; }
+  .reading-title   { font-size:24px; }
+  .reading-para    { font-size:16px; line-height:1.75; }
+  .reading-quote   { font-size:17px; }
+  .reading-credit  { font-size:14px; }
+
+  .field > span    { font-size:12px; letter-spacing:.18em; }
+  .field input,
+  .field textarea  { font-size:17px; }   /* 17px stops iOS zooming on focus */
+  .seal            { font-size:13px; letter-spacing:.18em; }
+  .quiet-link      { font-size:13px; letter-spacing:.20em; }
+
+  .vitrine-bar     { font-size:12px; letter-spacing:.16em; }
+  .leaf-count,
+  .loupe-level     { font-size:12px; }
+  .enquiry-note    { font-size:15px; }
+  .tenets p        { font-size:17px; }
+  .lede            { font-size:18px; }
+}
