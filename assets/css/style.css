@@ -1,0 +1,851 @@
+/* ═══════════════════════════════════════════════════════════════
+   Kwadrat Legacy Studio — a site of four rooms and no scrolling.
+   Palette and lettering follow the printed commission guides.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── The two skins ────────────────────────────────────────────────
+   Dark is the default. To use the parchment version instead, change
+   the opening tag of index.html to  <html lang="en" data-skin="light">
+   Nothing else needs touching.
+
+   Contrast, measured against the ground:
+     dark   primary 14.9:1   secondary 8.3:1   quiet 5.4:1   gold 6.3:1
+     light  primary 13.0:1   secondary 7.6:1   quiet 4.6:1   gold 4.7:1
+   ──────────────────────────────────────────────────────────────── */
+
+:root{
+  --paper:      #141F1D;   /* the ground: the brand ink, one notch deeper */
+  --paper-lift: #1B2B28;   /* the surface an image sits on */
+  --ink:        #F5F1E0;   /* parchment, for type */
+  --ink-soft:   rgba(245,241,224,.80);
+  --ink-faint:  rgba(245,241,224,.70);
+  --gold:       #C59707;   /* the gold of the mark itself */
+  --gold-quiet: #C59707;
+  --line:       rgba(245,241,224,.17);
+
+  --chip:        rgba(27,43,40,.90);
+  --veil:        #0F1716;
+  --scrim:       rgba(6,10,9,.72);
+  --select:      rgba(197,151,7,.28);
+
+  --serif:   "EB Garamond", Garamond, Georgia, "Times New Roman", serif;
+  --display: "Cormorant SC", "Cormorant Garamond", Garamond, Georgia, serif;
+
+  --ease:  cubic-bezier(.22,.61,.36,1);
+  --slow:  1100ms;
+  --calm:  680ms;
+
+  --masthead: 92px;
+  --gutter:   clamp(22px, 5vw, 68px);
+}
+
+html[data-skin="light"]{
+  --paper:      #F5F1E0;
+  --paper-lift: #FBF8EF;
+  --ink:        #1B2B28;
+  --ink-soft:   rgba(27,43,40,.82);
+  --ink-faint:  rgba(27,43,40,.74);
+  --gold:       #BC8811;   /* full gold, for rules and the mark */
+  --gold-quiet: #8A6410;   /* darkened, so small tracked caps stay legible */
+  --line:       rgba(27,43,40,.16);
+
+  --chip:        rgba(251,248,239,.88);
+  --veil:        #F5F1E0;
+  --scrim:       rgba(27,43,40,.62);
+  --select:      rgba(188,136,17,.20);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html,body{
+  height:100%;
+  /* The page itself never scrolls. Movement happens inside rooms. */
+  overflow:hidden;
+}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-size:clamp(16px,1.05vw,19px);
+  line-height:1.65;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overscroll-behavior:none;
+}
+
+/* The ground is flat and even. No vignette, no bloom. */
+
+a{ color:inherit; text-decoration:none; }
+
+:focus-visible{ outline:1px solid var(--gold); outline-offset:3px; }
+:focus:not(:focus-visible){ outline:none; }
+h1,h2,h3{ margin:0; font-weight:400; }
+p{ margin:0; }
+img{ max-width:100%; display:block; }
+
+::selection{ background:var(--select); }
+
+/* ── Shared lettering ─────────────────────────────────────────── */
+
+.grand{
+  font-family:var(--display);
+  font-weight:300;
+  line-height:1.16;
+  letter-spacing:.015em;
+  font-size:clamp(30px,4.4vw,66px);
+}
+.grand.small{ font-size:clamp(26px,3vw,44px); }
+
+.eyebrow{
+  font-family:var(--display);
+  font-size:clamp(10px,.78vw,12px);
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  color:var(--gold-quiet);
+  margin:0;
+}
+
+.rule{
+  height:1px; width:min(300px,46vw);
+  margin:clamp(20px,2.6vh,38px) auto;
+  background:var(--gold);
+  opacity:.55;
+}
+.rule.left{ margin-left:0; margin-right:auto; width:min(190px,34vw); }
+
+.lede{
+  font-size:clamp(17px,1.5vw,23px);
+  line-height:1.55;
+  color:var(--ink-soft);
+  max-width:34em;
+  margin-inline:auto;
+}
+
+.quiet-link{
+  font-family:var(--display);
+  font-size:clamp(10px,.8vw,12px);
+  letter-spacing:.30em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  padding-bottom:7px;
+  border-bottom:1px solid var(--gold);
+  transition:color var(--calm) var(--ease), border-color var(--calm) var(--ease);
+}
+.quiet-link:hover,.quiet-link:focus-visible{ color:var(--gold); border-color:var(--gold); }
+
+/* ── Masthead ─────────────────────────────────────────────────── */
+
+.masthead{
+  position:fixed; inset:0 0 auto 0; z-index:40;
+  height:var(--masthead);
+  padding-inline:var(--gutter);
+  display:flex; align-items:center; justify-content:space-between; gap:24px;
+}
+
+.mark{ display:flex; align-items:center; gap:14px; }
+.mark-glyph{ width:30px; height:30px; opacity:.92;
+  transition:opacity var(--calm) var(--ease); }
+.mark:hover .mark-glyph{ opacity:1; }
+.mark-words{ display:grid; gap:3px; }
+.mark-name{
+  font-family:var(--display); font-size:clamp(13px,1.05vw,16px);
+  letter-spacing:.24em; line-height:1;
+}
+.mark-sub{
+  font-family:var(--display); font-size:clamp(8px,.62vw,9.5px);
+  letter-spacing:.24em; line-height:1; color:var(--ink-faint);
+}
+
+.compass{ display:flex; gap:clamp(18px,2.6vw,44px); }
+.compass a{
+  position:relative;
+  font-family:var(--display);
+  font-size:clamp(11px,.85vw,13px);
+  letter-spacing:.22em; text-transform:uppercase;
+  color:var(--ink-faint);
+  padding-bottom:6px;
+  transition:color var(--calm) var(--ease);
+}
+.compass a::after{
+  content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
+  background:var(--gold); transform:scaleX(0); transform-origin:left;
+  transition:transform var(--calm) var(--ease);
+}
+.compass a:hover, .compass a:focus-visible{ color:var(--ink); }
+.compass a:hover::after, .compass a:focus-visible::after{ transform:scaleX(1); }
+.compass a.is-here{ color:var(--ink); }
+.compass a.is-here::after{ transform:scaleX(1); background:var(--gold); }
+
+/* ── The stage and its rooms ──────────────────────────────────── */
+
+.stage{ position:relative; z-index:10; height:100%; }
+
+.room{
+  position:absolute; inset:0;
+  display:grid; place-items:center;
+  /* An auto track would grow to the rail's max-content and push the
+     whole page sideways. Pin the track to the room. */
+  grid-template-columns:minmax(0,1fr);
+  padding:calc(var(--masthead) + clamp(8px,2vh,24px)) var(--gutter) clamp(56px,9vh,96px);
+  opacity:0; visibility:hidden;
+  transition:opacity var(--slow) var(--ease), visibility 0s linear var(--slow);
+}
+.room.is-open{
+  opacity:1; visibility:visible;
+  transition:opacity var(--slow) var(--ease), visibility 0s;
+}
+
+.room-inner{ width:100%; max-width:min(1180px,100%); min-width:0; }
+
+/* Every single-column grid in the site: an `auto` track would size itself
+   to its widest child — the rail, whose content is deliberately wider than
+   the screen — and drag the layout sideways. Pin them all to the room. */
+.threshold-inner,
+.works-inner,
+.works-head,
+.standard-inner,
+.tenets,
+.enquiry-side,
+.leaf,
+.wires,
+.sent,
+.field{ grid-template-columns:minmax(0,1fr); }
+
+.rail-frame{ min-width:0; }
+
+/* Each element rises a little, in order, once its room opens. */
+[data-veil]{
+  opacity:0; transform:translateY(14px);
+  transition:opacity var(--slow) var(--ease), transform var(--slow) var(--ease);
+}
+.room.is-open [data-veil]{ opacity:1; transform:none; }
+.room.is-open [data-veil="1"]{ transition-delay:120ms; }
+.room.is-open [data-veil="2"]{ transition-delay:260ms; }
+.room.is-open [data-veil="3"]{ transition-delay:400ms; }
+.room.is-open [data-veil="4"]{ transition-delay:540ms; }
+.room.is-open [data-veil="5"]{ transition-delay:680ms; }
+.room.is-open [data-veil="6"]{ transition-delay:820ms; }
+
+/* ── I. Threshold ─────────────────────────────────────────────── */
+
+.threshold-inner{ text-align:center; display:grid; justify-items:center; }
+.threshold-glyph{ width:clamp(44px,4.4vw,62px); height:auto; margin-bottom:clamp(22px,3.4vh,42px); }
+.threshold-inner .eyebrow{ margin-bottom:clamp(18px,2.8vh,34px); }
+.threshold-inner .lede{ margin-bottom:clamp(26px,4vh,50px); }
+
+/* ── II. Works ────────────────────────────────────────────────── */
+
+.works-inner{ display:grid; gap:clamp(14px,2.4vh,30px); }
+
+.works-head{ display:grid; justify-items:center; gap:clamp(12px,1.8vh,22px); text-align:center; }
+
+.ledger{
+  display:flex; flex-wrap:wrap; justify-content:center;
+  gap:clamp(10px,1.8vw,34px) clamp(16px,2.4vw,38px);
+}
+.ledger-tab{
+  appearance:none; background:none; border:0; cursor:pointer;
+  font-family:var(--display);
+  font-size:clamp(11px,.85vw,13px);
+  letter-spacing:.26em; text-transform:uppercase;
+  color:var(--ink-faint);
+  padding:0 0 8px;
+  border-bottom:1px solid transparent;
+  transition:color var(--calm) var(--ease), border-color var(--calm) var(--ease);
+}
+.ledger-tab:hover{ color:var(--ink-soft); }
+.ledger-tab.is-current{ color:var(--ink); border-bottom-color:var(--gold); }
+
+.rail-frame{ position:relative; min-width:0; }
+
+/* The one place anything scrolls — and it moves sideways, unrolling. */
+.rail{
+  display:flex; align-items:center; min-width:0;
+  justify-content:safe center;   /* centres a short rail, starts a long one at the left */
+  gap:clamp(16px,2vw,34px);
+  height:clamp(240px,46vh,460px);
+  overflow-x:auto; overflow-y:hidden;
+  scrollbar-width:none;
+  padding-inline:clamp(6px,3vw,52px);
+  cursor:grab;
+  outline:none;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-x:contain;
+}
+.rail::-webkit-scrollbar{ display:none; }
+.rail.is-dragging{ cursor:grabbing; }
+.rail.is-dragging .plate{ pointer-events:none; }
+
+.plate{
+  position:relative; flex:0 0 auto;
+  height:100%;
+  /* No single work may swallow the whole rail. */
+  max-width:min(62vw, 860px);
+  background:none; border:0; padding:0;
+  cursor:pointer;
+  opacity:.92;
+  transition:opacity var(--calm) var(--ease), transform var(--calm) var(--ease);
+}
+.plate img{
+  height:100%; width:auto; max-width:100%;
+  object-fit:cover;
+  object-position:center;
+  background:var(--paper-lift);
+  box-shadow:0 0 0 1px var(--line);
+  transition:box-shadow var(--calm) var(--ease);
+}
+.plate:hover, .plate:focus-visible{ opacity:1; transform:translateY(-4px); outline:none; }
+.plate:hover img, .plate:focus-visible img{ box-shadow:0 0 0 1px var(--gold); }
+
+/* A lineage scroll begins on the right and is read leftwards, so when
+   one is too wide for the rail it is the RIGHT edge that must show —
+   the head of the tree, not the middle of it. */
+.plate-scroll img{ object-position:right center; }
+.plate-scroll.reads-ltr img{ object-position:left center; }
+
+.plate-mark{
+  position:absolute; left:0; right:0; bottom:0;
+  padding:11px 14px;
+  font-family:var(--display);
+  font-size:11px; letter-spacing:.22em; text-transform:uppercase;
+  color:#F5F1E0;
+  background:var(--scrim);
+  opacity:0; transition:opacity var(--calm) var(--ease);
+}
+.plate:hover .plate-mark, .plate:focus-visible /* A lineage scroll begins on the right and is read leftwards, so when
+   one is too wide for the rail it is the RIGHT edge that must show —
+   the head of the tree, not the middle of it. */
+.plate-scroll img{ object-position:right center; }
+.plate-scroll.reads-ltr img{ object-position:left center; }
+
+.plate-mark{ opacity:1; }
+
+.plate-film::after{
+  content:""; position:absolute; inset:0; margin:auto;
+  width:52px; height:52px; border-radius:50%;
+  border:1px solid rgba(245,241,224,.9);
+  background:var(--scrim)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 7.5v9l7.5-4.5z' fill='%23FBF8EF'/%3E%3C/svg%3E")
+    center/22px no-repeat;
+}
+
+.rail-arrow{
+  position:absolute; top:50%; translate:0 -50%; z-index:5;
+  width:44px; height:44px; border-radius:50%;
+  background:var(--chip); border:1px solid var(--line);
+  color:var(--ink-soft); font-size:15px; cursor:pointer;
+  display:grid; place-items:center;
+  opacity:0;
+  transition:opacity var(--calm) var(--ease), color var(--calm) var(--ease), border-color var(--calm) var(--ease);
+}
+.rail-frame:hover .rail-arrow{ opacity:1; }
+.rail-arrow:focus-visible{ opacity:1; outline:none; border-color:var(--gold); color:var(--gold); }
+.rail-arrow:hover{ color:var(--gold); border-color:var(--gold); }
+.rail-arrow[disabled]{ opacity:0 !important; pointer-events:none; }
+.rail-prev{ left:calc(var(--gutter) * -.35); }
+.rail-next{ right:calc(var(--gutter) * -.35); }
+
+.works-foot{
+  display:flex; align-items:baseline; justify-content:space-between; gap:20px;
+  padding-inline:clamp(6px,3vw,52px);
+}
+.tally{
+  font-family:var(--display); font-size:clamp(10px,.78vw,12px);
+  letter-spacing:.26em; color:var(--gold);
+}
+.hint{
+  font-size:clamp(11px,.82vw,13px); font-style:italic; color:var(--ink-faint);
+}
+.rail-empty{
+  margin:auto; text-align:center; font-style:italic; color:var(--ink-faint);
+  font-size:clamp(14px,1.1vw,17px);
+}
+
+/* ── III. The Standard ────────────────────────────────────────── */
+
+.standard-inner{ text-align:center; display:grid; justify-items:center; max-width:900px; }
+.standard-inner .eyebrow{ margin-bottom:clamp(16px,2.6vh,30px); }
+.tenets{ display:grid; gap:clamp(16px,2.4vh,30px); }
+.tenets p{ font-size:clamp(16px,1.32vw,21px); line-height:1.6; color:var(--ink-soft); }
+.threshold-note{
+  font-family:var(--display);
+  font-size:clamp(11px,.86vw,13px) !important;
+  letter-spacing:.20em; text-transform:uppercase;
+  color:var(--ink-soft) !important;
+  padding-top:clamp(10px,1.8vh,22px);
+}
+
+/* ── IV. Enquiry ──────────────────────────────────────────────── */
+
+.enquiry-inner{
+  display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
+  gap:clamp(34px,6vw,96px); align-items:center;
+}
+.enquiry-side{ display:grid; justify-items:start; }
+.enquiry-side .eyebrow{ margin-bottom:clamp(14px,2.2vh,26px); }
+.enquiry-note{
+  font-style:italic; color:var(--ink-faint);
+  font-size:clamp(14px,1.05vw,17px);
+  margin-bottom:clamp(20px,3vh,36px);
+}
+.wires{ display:grid; gap:10px; font-size:clamp(15px,1.15vw,19px); color:var(--ink-soft); }
+.wires a{ width:fit-content; border-bottom:1px solid transparent; padding-bottom:2px;
+  transition:color var(--calm) var(--ease), border-color var(--calm) var(--ease); }
+.wires a:hover{ color:var(--gold); border-bottom-color:var(--gold); }
+
+.leaf{ display:grid; }
+.pit{ position:absolute; left:-9999px; }
+
+.field{ display:grid; gap:6px; margin-bottom:clamp(14px,2.4vh,26px); }
+.field > span{
+  font-family:var(--display);
+  font-size:clamp(9.5px,.72vw,11px);
+  letter-spacing:.24em; text-transform:uppercase;
+  color:var(--ink-faint);
+  transition:color var(--calm) var(--ease);
+}
+.field:focus-within > span{ color:var(--gold); }
+
+.field input, .field textarea{
+  width:100%;
+  border:0; border-bottom:1px solid var(--line);
+  background:transparent;
+  padding:9px 0;
+  font:inherit; font-size:clamp(15px,1.15vw,19px);
+  color:var(--ink);
+  outline:none;
+  border-radius:0;
+  transition:border-color var(--calm) var(--ease);
+}
+.field textarea{ resize:none; line-height:1.55; }
+.field input:focus, .field textarea:focus{ border-bottom-color:var(--gold); }
+.field input:-webkit-autofill{ -webkit-text-fill-color:var(--ink); -webkit-box-shadow:0 0 0 60px var(--paper) inset; }
+
+.deeds{ display:flex; align-items:center; gap:clamp(18px,2.4vw,34px); padding-top:clamp(6px,1.4vh,14px); }
+
+.seal{
+  appearance:none; cursor:pointer;
+  background:var(--ink); color:var(--paper);
+  border:1px solid var(--ink);
+  padding:14px 34px;
+  font-family:var(--display);
+  font-size:clamp(10px,.78vw,12px);
+  letter-spacing:.26em; text-transform:uppercase;
+  transition:background var(--calm) var(--ease), color var(--calm) var(--ease), border-color var(--calm) var(--ease);
+}
+.seal:hover:not([disabled]){ background:var(--gold); border-color:var(--gold); color:#141F1D; }
+.seal[disabled]{ opacity:.55; cursor:default; }
+
+.form-status{
+  display:none; margin-bottom:16px; padding:12px 14px;
+  border:1px solid var(--gold); background:rgba(197,151,7,.10);
+  font-size:14px; color:var(--ink-soft);
+}
+.form-status.show{ display:block; }
+
+.sent{ display:grid; gap:14px; }
+.sent[hidden]{ display:none; }
+.sent p:last-child{ color:var(--ink-soft); font-size:clamp(15px,1.15vw,18px); }
+
+/* ── Colophon ─────────────────────────────────────────────────── */
+
+.colophon{
+  position:fixed; inset:auto 0 0 0; z-index:30;
+  padding:0 var(--gutter) clamp(18px,3vh,30px);
+  text-align:center;
+  font-style:italic;
+  font-size:clamp(10px,.76vw,12.5px);
+  color:var(--ink-faint);
+  pointer-events:none;
+}
+
+/* ── The vitrine ─────────────────────────────────────────────────
+   A viewer for pages that must be inspected but never taken. Pages are
+   images rendered at build time — the PDF is never served — and this
+   layer sits above them so a right-click or long-press lands on the
+   guard, not the page. See README on what this does and does not stop.
+   ──────────────────────────────────────────────────────────────── */
+
+.vitrine{
+  position:fixed; inset:0; z-index:100;
+  display:grid; grid-template-rows:minmax(0,1fr) auto;
+  background:var(--veil);
+  opacity:0;
+  transition:opacity var(--calm) var(--ease);
+}
+.vitrine[hidden]{ display:none; }
+.vitrine.is-open{ opacity:1; }
+
+.vitrine-view{
+  position:relative; overflow:hidden;
+  min-height:0;
+  margin:clamp(52px,7vh,84px) clamp(46px,7vw,110px) 0;
+  cursor:grab;
+  touch-action:none;
+}
+.vitrine-view.is-panning{ cursor:grabbing; }
+.vitrine-view.is-flat{ cursor:default; }
+/* A book at rest: the halves turn rather than drag. */
+.vitrine-view.is-turnable{ cursor:pointer; }
+
+.vitrine-canvas{
+  position:absolute; inset:0;
+  display:grid; place-items:center;
+  /* The track must not grow to the page's natural pixel size, or
+     `max-height:100%` on the page resolves against the page itself. */
+  grid-template-rows:minmax(0,1fr); grid-template-columns:minmax(0,1fr);
+  transform-origin:50% 50%;
+  /* No will-change here: promoting this layer makes Chrome keep one
+     rasterisation and stretch it, which is precisely the blur. */
+  transform:scale(.97); opacity:0;
+  transition:transform var(--slow) var(--ease), opacity var(--slow) var(--ease);
+}
+.vitrine.is-open .vitrine-canvas{ opacity:1; }
+.vitrine-canvas.is-live{ transition:none; }
+
+/* Page layers, stacked so one can dissolve into the next. */
+.leafsheet{
+  grid-area:1/1;
+  max-width:none; max-height:none;
+  object-fit:contain;
+  background:var(--paper-lift);
+  box-shadow:0 0 0 1px var(--line);
+  opacity:0;
+  transition:opacity 520ms var(--ease);
+  -webkit-user-select:none; user-select:none;
+  -webkit-user-drag:none;
+  -webkit-touch-callout:none;
+  pointer-events:none;      /* a page is looked at, not handled */
+}
+.leafsheet.is-shown{ opacity:1; }
+
+/* An opening: one page, or two laid side by side as a book falls open.
+   A Hebrew book reads right to left, so the earlier page sits on the
+   right and the pair is laid out in reverse. */
+.opening{
+  display:flex; align-items:stretch; justify-content:center;
+  overflow:hidden;
+}
+.opening.reads-rtl{ flex-direction:row-reverse; }
+
+.opening .sheet{
+  display:block;
+  height:100%; width:auto;
+  max-width:none; max-height:none;
+  object-fit:contain;
+  -webkit-user-select:none; user-select:none;
+  -webkit-user-drag:none;
+  -webkit-touch-callout:none;
+}
+/* The gutter, where two leaves meet. */
+.opening.reads-rtl .sheet + .sheet{ border-right:1px solid var(--line); }
+.opening:not(.reads-rtl) .sheet + .sheet{ border-left:1px solid var(--line); }
+
+/* A film keeps its own size and its controls must be reachable. */
+.opening.has-film{ background:transparent; box-shadow:none; }
+.opening video.sheet{
+  height:auto; width:auto;
+  max-width:100%; max-height:100%;
+  background:#000;
+  box-shadow:0 0 0 1px var(--line);
+  pointer-events:none;
+}
+.opening.is-shown video.sheet{ pointer-events:auto; }
+
+.vitrine-guard{
+  position:absolute; left:0; top:0; width:0; height:0; z-index:2;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity var(--calm) var(--ease);
+  /* The mark is burnt into the page itself now. This layer only keeps a
+     right-click or long-press from landing on the image. */
+}
+.vitrine-guard.is-armed{ opacity:1; pointer-events:auto; }
+
+/* ── A piece published elsewhere ── */
+
+.plate-door{ aspect-ratio:4/5; height:100%; }
+
+.door-card{
+  display:flex; flex-direction:column;
+  height:100%; width:100%;
+  box-sizing:border-box;
+  background:var(--paper-lift);
+  box-shadow:0 0 0 1px var(--line);
+  overflow:hidden;
+  transition:box-shadow var(--calm) var(--ease);
+}
+.plate-door:hover .door-card,
+.plate-door:focus-visible .door-card{ box-shadow:0 0 0 1px var(--gold); }
+
+.door-type{
+  flex:1 1 auto;
+  display:flex; flex-direction:column; justify-content:center;
+  min-height:0;
+  padding:clamp(18px,2vw,32px);
+  text-align:center;
+}
+.door-source{
+  font-family:var(--display);
+  font-size:clamp(8.5px,.64vw,10px);
+  letter-spacing:.28em; text-transform:uppercase;
+  color:var(--gold-quiet);
+}
+.door-rule{ height:1px; width:40px; margin:12px auto; background:var(--gold); opacity:.55; }
+.door-title{
+  font-family:var(--display);
+  font-size:clamp(14px,1.15vw,19px);
+  line-height:1.28; color:var(--ink);
+  display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.door-type[dir="rtl"] .door-title{ line-height:1.45; }
+
+/* A band of the piece's own picture, for colour rather than for looking at. */
+.door-photo{
+  flex:0 0 38%;
+  min-height:0;
+  border-top:1px solid var(--line);
+  overflow:hidden;
+}
+.door-photo img{
+  width:100%; height:100%;
+  object-fit:cover; object-position:center;
+  display:block;
+}
+.door-card.is-plain .door-type{ padding-block:clamp(24px,3vw,44px); }
+
+.reading{
+  grid-area:1/1;
+  display:grid; grid-template-columns:minmax(0,1fr);
+  width:100%; height:100%;
+  max-width:760px;
+  margin-inline:auto;
+}
+
+.reading-picture{
+  margin:clamp(18px,2.6vh,30px) 0 clamp(20px,3vh,34px);
+  box-shadow:0 0 0 1px var(--line);
+  background:var(--paper-lift);
+  overflow:hidden;
+  max-height:34vh;
+  display:flex; justify-content:center;
+}
+.reading-picture img{
+  display:block;
+  max-width:100%; max-height:34vh;
+  width:auto; height:auto;
+}
+
+.reading-text{
+  min-width:0; max-height:100%;
+  overflow-y:auto; scrollbar-width:none;
+  overscroll-behavior:contain;
+  /* room beneath the last line, so it never sits under the bar */
+  padding-bottom:clamp(28px,5vh,56px);
+  text-align:start;
+}
+.reading-text::-webkit-scrollbar{ display:none; }
+
+.reading-source{
+  font-family:var(--display);
+  font-size:clamp(9.5px,.74vw,11.5px);
+  letter-spacing:.30em; text-transform:uppercase;
+  color:var(--gold-quiet);
+  margin-bottom:clamp(10px,1.6vh,18px);
+}
+.reading-title{
+  font-family:var(--display); font-weight:300;
+  font-size:clamp(20px,2.1vw,32px); line-height:1.22;
+  color:var(--ink);
+}
+.reading-text .rule{ margin-block:clamp(14px,2vh,22px); }
+
+.reading-credit{
+  font-size:clamp(12px,.92vw,14px); font-style:italic;
+  color:var(--ink-faint);
+  margin-bottom:clamp(16px,2.4vh,26px);
+}
+.reading-credit a{ border-bottom:1px solid transparent; transition:border-color var(--calm) var(--ease); }
+.reading-credit a:hover{ border-bottom-color:var(--gold); color:var(--gold); }
+
+.reading-quote{
+  margin:0 0 clamp(16px,2.2vh,24px);
+  font-size:clamp(15px,1.2vw,19px); line-height:1.6;
+  font-style:italic; color:var(--ink-soft);
+}
+.reading-para{
+  margin-bottom:clamp(12px,1.8vh,20px);
+  font-size:clamp(14px,1.02vw,17px);
+  line-height:1.75;
+  color:var(--ink-soft);
+}
+.reading-text[dir="rtl"] .reading-para,
+.reading-text[dir="rtl"] .reading-title{ line-height:1.85; }
+.reading-text[dir="rtl"] .rule.left{ margin-left:auto; margin-right:0;
+  background:linear-gradient(270deg,var(--gold),transparent); }
+
+.reading-go{ display:inline-block; margin-top:clamp(8px,1.4vh,16px); }
+
+@media (max-width:860px){
+  .reading-picture{ max-height:34vh; margin-block:16px 20px; }
+  .reading-picture img{ max-height:34vh; }
+}
+
+/* ── The bar beneath ── */
+
+.vitrine-bar{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:clamp(14px,2.6vw,40px); flex-wrap:wrap;
+  padding:clamp(14px,2.2vh,26px) clamp(46px,7vw,110px) clamp(18px,3vh,34px);
+  font-family:var(--display);
+  font-size:clamp(10px,.78vw,12px);
+  letter-spacing:.24em; text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.vitrine-name{ flex:1 1 auto; min-width:0; }
+.vitrine-tally{ color:var(--gold); white-space:nowrap; }
+.vitrine-works{ display:flex; align-items:center; gap:12px; }
+.work-step{
+  appearance:none; cursor:pointer; background:none; border:0;
+  color:var(--ink-faint); font:inherit; font-size:13px; letter-spacing:0;
+  padding:4px 2px;
+  transition:color var(--calm) var(--ease);
+}
+.work-step:hover:not([disabled]){ color:var(--gold); }
+.work-step[disabled]{ opacity:.28; cursor:default; }
+
+.vitrine-leaves,.vitrine-loupe{ display:flex; align-items:center; gap:14px; }
+.vitrine-leaves[hidden],.vitrine-loupe[hidden]{ display:none; }
+.leaf-count,.loupe-level{ min-width:6.5em; text-align:center; color:var(--ink-faint); }
+.loupe-level{ min-width:4.2em; }
+
+.leaf-step,.loupe-btn{
+  appearance:none; cursor:pointer;
+  background:none; border:1px solid var(--line);
+  width:34px; height:34px; border-radius:50%;
+  color:var(--ink-soft); font:inherit; font-size:14px; letter-spacing:0;
+  display:grid; place-items:center;
+  transition:color var(--calm) var(--ease), border-color var(--calm) var(--ease);
+}
+.loupe-reset{ width:auto; padding:0 14px; border-radius:999px; font-size:10px; letter-spacing:.2em; }
+.leaf-step:hover:not([disabled]),.loupe-btn:hover:not([disabled]){ color:var(--gold); border-color:var(--gold); }
+.leaf-step[disabled],.loupe-btn[disabled]{ opacity:.3; cursor:default; }
+
+.vitrine-close,.vitrine-step{
+  position:absolute; z-index:6;
+  background:none; border:0; cursor:pointer;
+  color:var(--ink-faint);
+  transition:color var(--calm) var(--ease);
+}
+.vitrine-close:hover,.vitrine-step:hover{ color:var(--gold); }
+.vitrine-close{ top:clamp(18px,3vh,34px); right:clamp(20px,3.2vw,44px); font-size:30px; line-height:1; }
+.vitrine-step{ top:calc(50% - 40px); translate:0 -50%; font-size:20px; padding:16px; }
+.vitrine-prev{ left:clamp(6px,1.4vw,26px); }
+.vitrine-next{ right:clamp(6px,1.4vw,26px); }
+.vitrine-step[disabled]{ opacity:0; pointer-events:none; }
+
+/* ── Narrow screens ───────────────────────────────────────────── */
+
+@supports (height:100dvh){ html,body{ height:100dvh; } }
+
+@media (max-width:900px){
+  :root{ --masthead:74px; }
+  .mark-sub{ display:none; }
+  .enquiry-inner{ grid-template-columns:minmax(0,1fr); gap:clamp(22px,4vh,40px); align-content:center; }
+  .enquiry-side .rule.left{ margin-block:14px; }
+  .enquiry-note{ margin-bottom:14px; }
+  .wires{ font-size:15px; }
+  .hint{ display:none; }
+  .works-foot{ justify-content:center; }
+  .rail-arrow{ display:none; }
+  .colophon{ font-size:9.5px; padding-bottom:14px; }
+}
+
+@media (max-width:640px){
+  .grand{ font-size:clamp(26px,7.4vw,40px); }
+  .rail{ height:clamp(200px,38vh,320px); }
+  /* On a phone the enquiry column may exceed the viewport; let the
+     column scroll inside itself so the page still never scrolls. */
+  .enquiry-inner{
+    max-height:100%; overflow-y:auto; scrollbar-width:none;
+    overscroll-behavior:contain;
+    /* Centred content taller than its box clips at the top and can never
+       be scrolled back to. Start it at the top instead. */
+    align-items:start; align-content:start;
+  }
+  .room:has(> .enquiry-inner){ align-items:start; }
+  .enquiry-inner::-webkit-scrollbar{ display:none; }
+  .vitrine-view{ margin:clamp(44px,6vh,64px) 14px 0; }
+  .vitrine-bar{
+    padding:12px 16px 18px; gap:10px 16px; justify-content:center;
+    font-size:9.5px; letter-spacing:.18em;
+  }
+  .vitrine-name{ flex:1 0 100%; text-align:center; }
+  .vitrine-tally{ order:5; }
+  .loupe-reset{ display:none; }
+  .vitrine-step{ padding:12px; }
+}
+
+/* Landscape phones: reclaim the vertical budget. */
+@media (max-height:520px){
+  :root{ --masthead:62px; }
+  .colophon{ display:none; }
+  .threshold-glyph{ display:none; }
+  .rail{ height:clamp(150px,44vh,260px); }
+}
+
+/* ── Restraint for those who ask for it ───────────────────────── */
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+  [data-veil]{ opacity:1; transform:none; }
+}
+
+/* ── Print ───────────────────────────────────────────────────────
+   The works are not for printing, and the pages are images rather
+   than a document, so there is nothing to print in the first place.
+   ──────────────────────────────────────────────────────────────── */
+
+@media print{
+  body > *{ display:none !important; }
+  body::after{
+    content:"Kwadrat Legacy Studio — these works are not available in print.";
+    display:block; padding:24pt;
+    font-family:Georgia, serif; font-size:11pt; color:#1B2B28;
+  }
+}
+
+/* Pages and photographs are not draggable or selectable. */
+.plate img,.leafsheet{
+  -webkit-user-drag:none;
+  -webkit-touch-callout:none;
+  -webkit-user-select:none; user-select:none;
+}
+
+/* ── The works, in plain HTML ─────────────────────────────────────
+   The same works the rail shows, written into the page so a crawler
+   that does not run JavaScript can read them. The moment the script
+   runs it is put away, and the gallery takes over.
+   ──────────────────────────────────────────────────────────────── */
+
+.works-index{
+  padding:calc(var(--masthead) + 24px) var(--gutter) 60px;
+  max-width:820px; margin-inline:auto;
+  color:var(--ink-soft);
+}
+.works-index h2, .works-index h3{
+  font-family:var(--display); font-weight:400; color:var(--ink);
+  margin:1.4em 0 .5em;
+}
+.works-index ul{ margin:0 0 1.4em; padding-inline-start:1.2em; }
+.works-index li{ margin-bottom:.35em; }
+.works-index p{ margin-bottom:.9em; line-height:1.7; }
+html.js .works-index{ display:none; }
