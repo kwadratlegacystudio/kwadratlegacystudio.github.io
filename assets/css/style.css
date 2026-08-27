@@ -91,6 +91,15 @@ img{ max-width:100%; display:block; }
 
 ::selection{ background:var(--select); }
 
+/* The Garamond sets numerals old-style — 1 and 2 at x-height, 5 and 0
+   descending. Handsome in English, but beside Hebrew letters, which sit
+   on a single flat line, they read as a mistake. Hebrew gets ordinary
+   lining figures; the English keeps the old-style ones. */
+[dir="rtl"]{
+  font-variant-numeric: lining-nums;
+  font-feature-settings: "lnum" 1;
+}
+
 /* ── Shared lettering ─────────────────────────────────────────── */
 
 .grand{
