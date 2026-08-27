@@ -96,6 +96,10 @@ img{ max-width:100%; display:block; }
    on a single flat line, they read as a mistake. Hebrew gets ordinary
    lining figures; the English keeps the old-style ones. */
 [dir="rtl"]{
+  /* Noto first, so the numerals come from the same face as the Hebrew
+     rather than from the Garamond, whose figures are a different shape
+     and sit on a different line. */
+  font-family: "Noto Serif Hebrew", "EB Garamond", Georgia, serif;
   font-variant-numeric: lining-nums;
   font-feature-settings: "lnum" 1;
 }
