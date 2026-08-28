@@ -212,6 +212,7 @@ img{ max-width:100%; display:block; }
 }
 
 .masthead-end{ display:flex; align-items:center; gap:clamp(16px,2.4vw,38px); }
+.compass{ align-items:center; }
 
 .compass{ display:flex; gap:clamp(18px,2.6vw,44px); }
 .compass a{
@@ -220,11 +221,11 @@ img{ max-width:100%; display:block; }
   font-size:clamp(11px,.85vw,13px);
   letter-spacing:.22em; text-transform:uppercase;
   color:var(--ink-faint);
-  padding-bottom:6px;
+  line-height:1;
   transition:color var(--calm) var(--ease);
 }
 .compass a::after{
-  content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
+  content:""; position:absolute; left:0; right:0; bottom:-6px; height:1px;
   background:var(--gold); transform:scaleX(0); transform-origin:left;
   transition:transform var(--calm) var(--ease);
 }
