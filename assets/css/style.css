@@ -104,6 +104,13 @@ img{ max-width:100%; display:block; }
 [dir="rtl"] .vitrine-canvas{ direction:ltr; }
 [dir="rtl"] .plate, [dir="rtl"] .doorway, [dir="rtl"] .rail-empty{ direction:rtl; }
 
+/* The header keeps its arrangement in every language: the mark on the
+   left, the destinations and the tongues on the right. Only the
+   destinations are turned among themselves, so a Hebrew or Yiddish
+   reader still meets the first of them first. */
+[dir="rtl"] .masthead{ direction:ltr; }
+[dir="rtl"] .compass{ direction:rtl; }
+
 [dir="rtl"] .compass a::after{ transform-origin:right; }
 
 /* Wide tracking is a Latin display convention. Hebrew letters, which
