@@ -50,6 +50,13 @@
 
   var works    = window.KWADRAT_WORKS || {};
 
+  /* The tongue in use. If i18n.js is absent for any reason the
+     English written here still stands. */
+  function T(key, fill, plain) {
+    var said = window.KW_T ? window.KW_T(key, fill) : '';
+    return said || plain;
+  }
+
   var GROUPS = {
     unrolled: { hint: 'Select a scroll to open it, then drag to travel and scroll to magnify.' },
     bound:    { hint: 'Select a sefer to open it, then turn its pages one by one.' },
@@ -65,7 +72,11 @@
   var group    = 'pages';
   var items    = [];
 
-  function url(path) { return encodeURI(path); }
+  /* The works are listed with paths written from the site root. On
+     /he/ and /yi/ the page sits a level down, so the root is said
+     out loud there. */
+  var ROOT = window.KWADRAT_ROOT || '';
+  function url(path) { return encodeURI(ROOT + path); }
 
   function cover(item) { return item.cover || item.poster || item.src; }
   function frames(item) { return (item && item.frames) || []; }
@@ -172,6 +183,10 @@
     return f.length + ' pieces';
   }
 
+  document.addEventListener('kwadrat:tongue', function () {
+    if (GROUPS[group]) paint(group);   // never before the rail has a group
+  });
+
   function paint(name) {
     group = name;
     items = (works[name] || []).slice();
@@ -184,12 +199,12 @@
     });
 
     var note = document.querySelector('.hint');
-    if (note && GROUPS[name]) note.textContent = GROUPS[name].hint;
+    if (note && GROUPS[name]) note.textContent = T('hint.' + name, null, GROUPS[name].hint);
 
     if (!items.length) {
       var empty = document.createElement('p');
       empty.className = 'rail-empty';
-      empty.textContent = 'This portfolio is being prepared.';
+      empty.textContent = T('works.empty', null, 'This portfolio is being prepared.');
       rail.appendChild(empty);
       tally.textContent = '—';
       arm();
@@ -747,7 +762,7 @@
     go.href = item.url;
     go.target = '_blank';
     go.rel = 'noopener noreferrer';
-    go.textContent = 'Read at ' + host(item.url);
+    go.textContent = T('viewer.readAt', { host: host(item.url) }, 'Read at ' + host(item.url));
     col.appendChild(go);
 
     card.appendChild(col);
@@ -814,10 +829,13 @@
     });
 
     var box = sheets[n];
-    var where = box.dataset.pages ? 'Pages ' + box.dataset.pages : (n + 1) + ' of ' + sheets.length;
-    if (!isDoc(items[at])) where = (n + 1) + ' of ' + sheets.length;
+    var count = T('viewer.of', { n: n + 1, total: sheets.length }, (n + 1) + ' of ' + sheets.length);
+    var where = box.dataset.pages
+      ? T('viewer.pages', { n: box.dataset.pages }, 'Pages ' + box.dataset.pages)
+      : count;
+    if (!isDoc(items[at])) where = count;
     else if (box.dataset.pages && box.dataset.pages.indexOf('–') === -1)
-      where = 'Page ' + box.dataset.pages;
+      where = T('viewer.page', { n: box.dataset.pages }, 'Page ' + box.dataset.pages);
     leafNum.textContent = box.dataset.section
       ? box.dataset.section + '  ·  ' + where
       : where;
@@ -1033,16 +1051,16 @@
       if (!form.checkValidity()) { form.reportValidity(); return; }
 
       var button = form.querySelector('button[type="submit"]');
-      if (button) { button.disabled = true; button.textContent = 'Sending…'; }
+      if (button) { button.disabled = true; button.textContent = T('enq.sending', null, 'Sending…'); }
       status.className = 'form-status';
       status.textContent = '';
 
       var key = (window.KWADRAT_FORM_KEY || '').trim();
       if (!key) {
-        if (button) { button.disabled = false; button.textContent = 'Send Enquiry'; }
+        if (button) { button.disabled = false; button.textContent = T('enq.send', null, 'Send Enquiry'); }
         status.className = 'form-status show';
-        status.textContent = 'The enquiry form is not yet connected. ' +
-          'Please write to info@kwadratlegacystudio.com, or use WhatsApp.';
+        status.textContent = T('enq.error', null,
+          'The enquiry could not be sent. Please write to info@kwadratlegacystudio.com, or use WhatsApp.');
         return;
       }
 
@@ -1070,10 +1088,11 @@
         fields.hidden = true;
         sent.hidden = false;
       }).catch(function (err) {
-        if (button) { button.disabled = false; button.textContent = 'Send Enquiry'; }
+        if (button) { button.disabled = false; button.textContent = T('enq.send', null, 'Send Enquiry'); }
         status.className = 'form-status show';
-        status.textContent = 'The enquiry could not be sent (' + err.message +
-          '). Please write to info@kwadratlegacystudio.com, or use WhatsApp.';
+        status.textContent = T('enq.error', null,
+          'The enquiry could not be sent. Please write to info@kwadratlegacystudio.com, or use WhatsApp.')
+          + '  (' + err.message + ')';
       });
     });
   }

@@ -95,6 +95,32 @@ img{ max-width:100%; display:block; }
    descending. Handsome in English, but beside Hebrew letters, which sit
    on a single flat line, they read as a mistake. Hebrew gets ordinary
    lining figures; the English keeps the old-style ones. */
+/* The rail, and the sheets inside the vitrine, are built with
+   left-to-right arithmetic — scrollLeft, spread order, page turns.
+   Flipping the document must not reach them, so they are pinned;
+   the text inside each plate is turned back. */
+[dir="rtl"] .rail,
+[dir="rtl"] .vitrine-view,
+[dir="rtl"] .vitrine-canvas{ direction:ltr; }
+[dir="rtl"] .plate, [dir="rtl"] .doorway, [dir="rtl"] .rail-empty{ direction:rtl; }
+
+[dir="rtl"] .compass a::after{ transform-origin:right; }
+
+/* Wide tracking is a Latin display convention. Hebrew letters, which
+   already stand apart, only look loosened by it — and the words run
+   longer than the row can hold. */
+[dir="rtl"] .compass a,
+[dir="rtl"] .ledger-tab{ letter-spacing:.10em; }
+[dir="rtl"] .eyebrow{ letter-spacing:.18em; }
+[dir="rtl"] .tally{ letter-spacing:.12em; }
+
+/* Counters are numbers, not sentences. Left to right in every
+   language, so "01 / 07" is never read as seven of one. */
+[dir="rtl"] .tally,
+[dir="rtl"] .vitrine-tally,
+[dir="rtl"] .loupe-level{ direction:ltr; }
+[dir="rtl"] .rule.left{ margin-left:auto; margin-right:0; }
+
 [dir="rtl"]{
   /* Noto first, so the numerals come from the same face as the Hebrew
      rather than from the Garamond, whose figures are a different shape
@@ -175,6 +201,8 @@ img{ max-width:100%; display:block; }
   letter-spacing:.24em; line-height:1; color:var(--ink-faint);
 }
 
+.masthead-end{ display:flex; align-items:center; gap:clamp(16px,2.4vw,38px); }
+
 .compass{ display:flex; gap:clamp(18px,2.6vw,44px); }
 .compass a{
   position:relative;
@@ -194,6 +222,41 @@ img{ max-width:100%; display:block; }
 .compass a:hover::after, .compass a:focus-visible::after{ transform:scaleX(1); }
 .compass a.is-here{ color:var(--ink); }
 .compass a.is-here::after{ transform:scaleX(1); background:var(--gold); }
+
+/* ── Three tongues ──────────────────────────────────────────────
+   E for the English, the luchot for the Hebrew, an alef for the
+   Yiddish — the two that share an alphabet kept apart by the mark
+   between them. Small, quiet, and always in the same corner. */
+.tongues{
+  display:flex; align-items:center;
+  /* Read left to right in every language: the marks are a fixed
+     set, not a sentence. */
+  direction:ltr;
+}
+.tongue{
+  display:grid; place-items:center;
+  width:26px; height:26px;
+  color:var(--ink-faint);
+  transition:color var(--calm) var(--ease);
+}
+.tongue + .tongue{ border-left:1px solid var(--line); }
+.tongue:hover, .tongue:focus-visible{ color:var(--ink); }
+.tongue.is-current{ color:var(--gold); }
+
+.tongue-mark{
+  font-family:var(--display);
+  font-size:13px; line-height:1; letter-spacing:0;
+}
+.tongue-alef{
+  font-family:"Noto Serif Hebrew", Georgia, serif;
+  font-size:16px;
+}
+.tongue-luchot{
+  width:16px; height:16px;
+  fill:none; stroke:currentColor; stroke-width:1.5;
+  /* Square feet, arched heads — tablets, not two arches. */
+  stroke-linejoin:miter;
+}
 
 /* ── The stage and its rooms ──────────────────────────────────── */
 
@@ -783,6 +846,15 @@ img{ max-width:100%; display:block; }
 
 /* On a phone the wordmark and the navigation fight for one line and
    both lose. The gold K carries the studio on its own at this size. */
+@media (max-width:640px){
+  .masthead-end{ gap:12px; }
+  .compass{ gap:14px; }
+  .tongue{ width:22px; height:22px; }
+  .tongue-mark{ font-size:12px; }
+  .tongue-alef{ font-size:15px; }
+  .tongue-luchot{ width:13px; height:13px; }
+}
+
 @media (max-width:560px){
   .mark-words{ display:none; }
   .mark-glyph{ width:34px; height:34px; }
@@ -914,4 +986,37 @@ html.js .works-index{ display:none; }
   .enquiry-note    { font-size:15px; }
   .tenets p        { font-size:17px; }
   .lede            { font-size:18px; }
+}
+
+/* ── The header, folded ──────────────────────────────────────────
+   A phone cannot hold the mark, three destinations and three tongues
+   on one line — least of all in Yiddish, whose words are the longest.
+   So the header folds: the mark and the tongues keep the top line,
+   the compass takes the one beneath. Nothing is dropped, and the row
+   can no longer overrun the screen — which in a right-to-left page
+   would drag the whole site sideways. */
+@media (max-width:560px){
+  :root{ --masthead:94px; }
+
+  .masthead{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    grid-template-areas:
+      "mark    .       tongues"
+      "compass compass compass";
+    align-content:center;
+    row-gap:10px;
+  }
+  .mark{ grid-area:mark; }
+  .masthead-end{ display:contents; }
+  .tongues{ grid-area:tongues; }
+  .compass{
+    grid-area:compass;
+    justify-content:center;
+    gap:clamp(10px,3.6vw,22px);
+    /* The last resort, and only in the longest language: the row of
+       destinations may be swiped rather than spill off the page. */
+    min-width:0; overflow-x:auto; scrollbar-width:none;
+  }
+  .compass::-webkit-scrollbar{ display:none; }
 }
