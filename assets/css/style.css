@@ -333,8 +333,10 @@ img{ max-width:100%; display:block; }
    name is what the eye lands on. */
 .attribution{
   display:grid; justify-items:center;
-  gap:clamp(5px,.7vh,9px);
-  margin:0 0 clamp(26px,4vh,50px);
+  /* Three lines, kept plainly apart, with air beneath before the
+     way in. */
+  gap:clamp(8px,1.1vh,14px);
+  margin:0 0 clamp(46px,7vh,86px);
 }
 .attribution-pre,
 .attribution-role{
@@ -345,10 +347,12 @@ img{ max-width:100%; display:block; }
 }
 .attribution-name{
   font-family:var(--display);
-  font-size:clamp(15px,1.35vw,21px);
-  letter-spacing:.16em; text-transform:uppercase;
+  font-size:clamp(17px,2vw,31px);
+  letter-spacing:.10em; text-transform:uppercase;
   color:var(--ink);
   line-height:1.25;
+  /* The name holds its own line in every language. */
+  white-space:nowrap;
 }
 
 /* ── II. Works ────────────────────────────────────────────────── */
@@ -1070,4 +1074,10 @@ html.js .works-index{ display:none; }
     min-width:0; overflow-x:auto; scrollbar-width:none;
   }
   .compass::-webkit-scrollbar{ display:none; }
+
+  /* The name must not wrap, so on a narrow screen it gives up a
+     little size and tracking rather than the line. */
+  .attribution-name{ font-size:15.5px; letter-spacing:.05em; }
+  .attribution-pre,
+  .attribution-role{ font-size:10.5px; letter-spacing:.20em; }
 }

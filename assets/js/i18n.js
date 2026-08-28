@@ -28,10 +28,10 @@
     'th.lede':        ['Museum-grade lineage scrolls and hardcover yichus sefarim, privately commissioned, family by family.',
                        'מגילות יוחסין מהודרות וספרי יוחסין כרוכים, נעשים בהזמנה פרטית ובמלאכה מיוחדת לכל משפחה ומשפחה.',
                        'מייסטערהאפטיגע מגילות יוחסין און הערליכע ספרי יחוס, פראדוצירט אויף פריוואטע באשטעלונג — יעדע משפחה אלס א ווערק פאר זיך.'],
-    'by.pre':         ['by the internationally renowned',
+    'by.pre':         ['by the international renowned',
                        'ע״י המפורסם',
                        'דורך דעם בארומטען'],
-    'by.name':        ['Rabbi Yossef Nechemya Kwadrat',
+    'by.name':        ['Rabbi Yossef Nachemia Kwadrat',
                        'הר״ר יוסף נחמי׳ הכהן קוואדראט הי״ו',
                        'ר׳ יוסף נחמי׳ הכהן קוואדראט נ״י'],
     'by.role':        ['genealogist and historian',
@@ -244,9 +244,7 @@
         /* Keep the address honest, so a reload or a shared link
            lands on the same tongue. */
         try {
-          var base = location.pathname.replace(/\/(he|yi)\/?$/, '/').replace(/\/index\.html$/, '/');
-          if (base.slice(-1) !== '/') base += '/';
-          history.pushState({ lang: want }, '', base.replace(/\/$/, '') + PATH[want] + location.hash);
+          history.pushState({ lang: want }, '', PATH[want] + location.hash);
         } catch (e) {}
       });
     });
