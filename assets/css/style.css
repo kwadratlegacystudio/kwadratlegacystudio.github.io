@@ -118,6 +118,9 @@ img{ max-width:100%; display:block; }
    longer than the row can hold. */
 [dir="rtl"] .compass a,
 [dir="rtl"] .ledger-tab{ letter-spacing:.10em; }
+[dir="rtl"] .attribution-pre,
+[dir="rtl"] .attribution-role{ letter-spacing:.16em; }
+[dir="rtl"] .attribution-name{ letter-spacing:.04em; }
 [dir="rtl"] .eyebrow{ letter-spacing:.18em; }
 [dir="rtl"] .tally{ letter-spacing:.12em; }
 
@@ -255,8 +258,10 @@ img{ max-width:100%; display:block; }
   font-size:13px; line-height:1; letter-spacing:0;
 }
 .tongue-alef{
-  font-family:"Noto Serif Hebrew", Georgia, serif;
-  font-size:16px;
+  /* A written alef, not a printed one — the Yiddish mark should look
+     like a hand made it. */
+  font-family:"Playpen Sans Hebrew", "Noto Serif Hebrew", Georgia, serif;
+  font-size:17px;
 }
 .tongue-luchot{
   width:16px; height:16px;
@@ -314,13 +319,37 @@ img{ max-width:100%; display:block; }
 .room.is-open [data-veil="4"]{ transition-delay:540ms; }
 .room.is-open [data-veil="5"]{ transition-delay:680ms; }
 .room.is-open [data-veil="6"]{ transition-delay:820ms; }
+.room.is-open [data-veil="7"]{ transition-delay:960ms; }
 
 /* ── I. Threshold ─────────────────────────────────────────────── */
 
 .threshold-inner{ text-align:center; display:grid; justify-items:center; }
 .threshold-glyph{ width:clamp(44px,4.4vw,62px); height:auto; margin-bottom:clamp(22px,3.4vh,42px); }
 .threshold-inner .eyebrow{ margin-bottom:clamp(18px,2.8vh,34px); }
-.threshold-inner .lede{ margin-bottom:clamp(26px,4vh,50px); }
+.threshold-inner .lede{ margin-bottom:clamp(22px,3.4vh,42px); }
+
+/* The hand behind the work, said once and quietly: the name set like
+   the mark itself, the words either side of it stepped back so the
+   name is what the eye lands on. */
+.attribution{
+  display:grid; justify-items:center;
+  gap:clamp(5px,.7vh,9px);
+  margin:0 0 clamp(26px,4vh,50px);
+}
+.attribution-pre,
+.attribution-role{
+  font-family:var(--display);
+  font-size:clamp(10px,.76vw,12px);
+  letter-spacing:.28em; text-transform:uppercase;
+  color:var(--ink-faint);
+}
+.attribution-name{
+  font-family:var(--display);
+  font-size:clamp(15px,1.35vw,21px);
+  letter-spacing:.16em; text-transform:uppercase;
+  color:var(--ink);
+  line-height:1.25;
+}
 
 /* ── II. Works ────────────────────────────────────────────────── */
 
@@ -858,7 +887,7 @@ img{ max-width:100%; display:block; }
   .compass{ gap:14px; }
   .tongue{ width:22px; height:22px; }
   .tongue-mark{ font-size:12px; }
-  .tongue-alef{ font-size:15px; }
+  .tongue-alef{ font-size:16px; }
   .tongue-luchot{ width:13px; height:13px; }
 }
 
@@ -899,7 +928,22 @@ img{ max-width:100%; display:block; }
   :root{ --masthead:62px; }
   .colophon{ display:none; }
   .threshold-glyph{ display:none; }
+  /* The byline stays — it is the point of the page — but draws itself
+     in, so a phone held sideways still shows the whole threshold. */
+  .threshold-inner .lede{ margin-bottom:14px; }
+  .attribution{ gap:3px; margin-bottom:14px; }
+  .attribution-pre,
+  .attribution-role{ font-size:10px; letter-spacing:.22em; }
+  .attribution-name{ font-size:14px; }
   .rail{ height:clamp(150px,44vh,260px); }
+}
+
+/* Shorter still — a small phone held sideways. The headline and the
+   name are what must survive; the line above them can go. */
+@media (max-height:440px){
+  .threshold-inner .eyebrow{ display:none; }
+  .grand{ font-size:clamp(24px,3.4vw,34px); }
+  .rule{ margin-block:12px; }
 }
 
 /* ── Restraint for those who ask for it ───────────────────────── */
