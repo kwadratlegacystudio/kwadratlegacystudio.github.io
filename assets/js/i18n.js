@@ -31,7 +31,7 @@
     'by.pre':         ['by the international renowned',
                        'ע״י המפורסם',
                        'דורך דעם בארומטען'],
-    'by.name':        ['Rabbi Yossef Nachemia Kwadrat',
+    'by.name':        ['Rabbi Yossef Nechemiah Kwadrat',
                        'הר״ר יוסף נחמי׳ הכהן קוואדראט הי״ו',
                        'ר׳ יוסף נחמי׳ הכהן קוואדראט נ״י'],
     'by.role':        ['genealogist and historian',
