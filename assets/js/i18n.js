@@ -88,7 +88,7 @@
     /* ── enquiry ────────────────────────────────────────────── */
     'enq.eyebrow':    ['Begin', 'ראשית דבר', 'דער אנהייב'],
     'enq.head':       ['Private Commission<br>Enquiry',
-                       'פנייה בדבר<br>הזמנה פרטית',
+                       'להתקשר אודות<br>הזמנה פרטית',
                        'אנפראגע פאר א<br>פריוואטער באשטעלונג'],
     'enq.note':       ['By appointment. Each enquiry is read personally.',
                        'בתיאום מראש. כל פנייה נקראת ונבחנת באופן אישי.',
