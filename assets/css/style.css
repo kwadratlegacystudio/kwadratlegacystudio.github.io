@@ -1183,3 +1183,15 @@ html[data-page="document"] .colophon{
   position:static; margin:0 auto clamp(28px,5vh,56px);
   padding-inline:var(--gutter);
 }
+
+/* A link inside a sentence, marked the way everything else here is
+   marked: a hairline, and gold on approach. Nothing is added to the
+   page but the underline. */
+.tenets a{
+  color:inherit;
+  border-bottom:1px solid var(--line);
+  padding-bottom:2px;
+  transition:color var(--calm) var(--ease), border-color var(--calm) var(--ease);
+}
+.tenets a:hover,
+.tenets a:focus-visible{ color:var(--gold); border-color:var(--gold); }

@@ -93,9 +93,9 @@
     'std.p1':         ['First-hand sources where available. Reliable sources where needed.<br>Unverified sources are not used.',
                        'מקורות ראשוניים במקום שהם מצויים; מקורות מהימנים במקום הצורך.<br>דבר שלא נתאמת — אינו נכנס למלאכה.',
                        'ערשטהאנטיגע מקורות וואו זיי זענען פאראן; פארלעסלעכע מקורות וואו עס פעלט אויס.<br>אמבאשטעטיגטע מקורות ווערן נישט גענוצט אין אונזערע ווערק.'],
-    'std.p2':         ['Each work is scoped individually according to its material, depth, format and finish &mdash; and is prepared as a single, unrepeated object.',
-                       'כל יצירה נקבעת ונערכת בפני עצמה, לפי החומר, עומק המחקר, המתכונת והגימור — ונעשית כיצירה יחידה שאינה נשנית.',
-                       'יעדער פראיעקט ווערט באזונדער אנאליזירט, אויסגעפארשט, און אויסגעשטעלט, און ווערט מייסטערהאפטיג געמאלן אלס איין אייגנארטיגע ווערק.'],
+    'std.p2':         ['Each work is <a href="/works/">scoped individually</a> according to its material, depth, format and finish &mdash; and is prepared as a single, unrepeated object.',
+                       'כל יצירה <a href="/works/">נקבעת ונערכת בפני עצמה</a>, לפי החומר, עומק המחקר, המתכונת והגימור — ונעשית כיצירה יחידה שאינה נשנית.',
+                       'יעדער פראיעקט ווערט <a href="/works/">באזונדער אנאליזירט</a>, אויסגעפארשט, און אויסגעשטעלט, און ווערט מייסטערהאפטיג געמאלן אלס איין אייגנארטיגע ווערק.'],
 
     /* ── enquiry ────────────────────────────────────────────── */
     'enq.eyebrow':    ['Begin', 'ראשית דבר', 'דער אנהייב'],
