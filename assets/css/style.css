@@ -1110,3 +1110,76 @@ html.js .works-index{ display:none; }
   .attribution-pre,
   .attribution-role{ font-size:10.5px; letter-spacing:.20em; }
 }
+
+
+/* ── A document, not a room ──────────────────────────────────────
+   The rooms hold one viewport each and the page must never scroll.
+   /works/ is the opposite: a long read. It opts out by name, so
+   nothing else is affected. */
+html[data-page="document"],
+html[data-page="document"] body{ overflow:auto; height:auto; }
+
+.doc-head{
+  display:flex; align-items:center; justify-content:space-between; gap:24px;
+  padding:clamp(20px,3vh,34px) var(--gutter);
+  max-width:940px; margin-inline:auto;
+}
+.compass-back{
+  font-family:var(--display);
+  font-size:clamp(10px,.78vw,12px);
+  letter-spacing:.22em; text-transform:uppercase;
+  color:var(--ink-faint);
+  transition:color var(--calm) var(--ease);
+}
+.compass-back:hover{ color:var(--gold); }
+
+.doc{
+  max-width:720px; margin-inline:auto;
+  padding:clamp(18px,3vh,40px) var(--gutter) clamp(48px,7vh,88px);
+}
+.doc-title{
+  font-family:var(--display); font-weight:400;
+  font-size:clamp(26px,3.2vw,46px);
+  line-height:1.2; margin:.35em 0 0;
+}
+.doc-lede{
+  font-size:clamp(17px,1.35vw,21px);
+  color:var(--ink-soft); margin:0 0 2.4em;
+}
+.doc h2{
+  font-family:var(--display); font-weight:400;
+  font-size:clamp(19px,1.7vw,26px);
+  margin:2.6em 0 .7em; color:var(--ink);
+}
+.doc p{ margin:0 0 1.1em; color:var(--ink-soft); }
+.doc-steps{ margin:0 0 1.4em; padding-inline-start:1.3em; color:var(--ink-soft); }
+.doc-steps li{ margin-bottom:.9em; }
+.doc-steps strong{ color:var(--ink); font-weight:500; }
+.doc-close{ margin-top:2.6em; }
+.doc .quiet-link{ display:inline-block; margin-top:1.4em; }
+
+/* The generated list sits inside the document rather than hidden. */
+html[data-page="document"] .works-index{
+  display:block; padding:0; max-width:none; margin:2.6em 0 0;
+}
+html[data-page="document"] .works-index h2{ margin-top:2.6em; }
+
+/* The way through to /works/, kept as quiet as the colophon it sits
+   above. It is a real link on a real page — not hidden text. */
+.colophon-link{
+  font-family:var(--display);
+  font-size:clamp(9px,.68vw,10.5px);
+  letter-spacing:.26em; text-transform:uppercase;
+  color:var(--ink-faint);
+  border-bottom:1px solid var(--line);
+  padding-bottom:3px;
+  transition:color var(--calm) var(--ease), border-color var(--calm) var(--ease);
+}
+.colophon-link:hover{ color:var(--gold); border-color:var(--gold); }
+
+/* In a room the colophon is pinned to the foot of the viewport. In a
+   document that puts it on top of the last paragraph. */
+html[data-page="document"] .colophon{
+  position:static; margin:0 auto clamp(28px,5vh,56px);
+  padding-inline:var(--gutter);
+}
