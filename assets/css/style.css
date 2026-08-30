@@ -487,6 +487,30 @@ img{ max-width:100%; display:block; }
 /* ── III. The Standard ────────────────────────────────────────── */
 
 .standard-inner{ text-align:center; display:grid; justify-items:center; max-width:900px; }
+
+/* The hand behind the standard. Small, hairline-framed, captioned in
+   the same tracked caps as everything else — evidence rather than a
+   portrait, so the room still reads as being about the work. */
+/* It sits under the line about each enquiry being read personally —
+   the person who reads it. The column beside the form had 225px going
+   spare; The Standard, already full, had none. */
+.at-work{
+  margin:clamp(18px,2.6vh,32px) 0 0;
+  display:grid; justify-items:start; gap:clamp(7px,1vh,11px);
+  width:min(300px,100%);
+}
+[dir="rtl"] .at-work{ justify-items:end; }
+.at-work img{
+  display:block; width:100%; height:auto;
+  border:1px solid var(--line);
+}
+.at-work figcaption{
+  font-family:var(--display);
+  font-size:clamp(9px,.68vw,10.5px);
+  letter-spacing:.24em; text-transform:uppercase;
+  color:var(--ink-faint);
+}
+[dir="rtl"] .at-work figcaption{ letter-spacing:.14em; }
 .standard-inner .eyebrow{ margin-bottom:clamp(16px,2.6vh,30px); }
 .tenets{ display:grid; gap:clamp(16px,2.4vh,30px); }
 .tenets p{ font-size:clamp(16px,1.32vw,21px); line-height:1.6; color:var(--ink-soft); }
@@ -945,6 +969,10 @@ img{ max-width:100%; display:block; }
 
 /* Shorter still — a small phone held sideways. The headline and the
    name are what must survive; the line above them can go. */
+@media (max-height:640px){
+  .at-work{ display:none; }
+}
+
 @media (max-height:440px){
   .threshold-inner .eyebrow{ display:none; }
   .grand{ font-size:clamp(24px,3.4vw,34px); }
