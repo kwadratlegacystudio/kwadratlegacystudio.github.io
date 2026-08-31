@@ -606,6 +606,19 @@ img{ max-width:100%; display:block; }
   pointer-events:none;
 }
 
+/* The Companies Act disclosure. It stays in English on every tongue:
+   a registered name and number are legal identifiers, and a translated
+   one would be worse than none. dir=ltr so it reads correctly when the
+   page around it is Hebrew or Yiddish. */
+.colophon-legal{
+  display:block;
+  margin-top:4px;
+  font-style:normal;
+  font-size:clamp(9px,.62vw,10.5px);
+  letter-spacing:.015em;
+  opacity:.72;
+}
+
 /* ── The vitrine ─────────────────────────────────────────────────
    A viewer for pages that must be inspected but never taken. Pages are
    images rendered at build time — the PDF is never served — and this
