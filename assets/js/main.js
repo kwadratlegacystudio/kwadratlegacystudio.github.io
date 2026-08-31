@@ -1076,7 +1076,7 @@
       body.append('email',    value('email'));
       body.append('phone',    value('phone'));
       body.append('message',  value('message'));
-      body.append('botcheck', value('bot-field'));
+      body.append('botcheck', value('botcheck'));
       /* Which tongue they were reading in, so the reply can be written
          in the same one. */
       body.append('language', ({ en: 'English', he: 'Hebrew', yi: 'Yiddish' })[window.KW_LANG] || 'English');
