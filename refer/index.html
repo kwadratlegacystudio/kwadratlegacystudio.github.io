@@ -139,6 +139,7 @@
       <li>
         <h2>Last &mdash; your link</h2>
         <p class="refer-post" id="post" dir="auto"></p>
+        <p><em>Tap Share, choose WhatsApp, then My Status.</em></p>
         <div class="refer-do">
           <button class="seal" data-share="link">Share your link</button>
           <button class="seal" id="copy" style="background:transparent">Copy</button>
@@ -309,7 +310,23 @@
     b.addEventListener('click', function () {
       var what = b.getAttribute('data-share');
       if (what === 'link') {
-        location.href = 'https://wa.me/?text=' + encodeURIComponent(made);
+        /* Not wa.me: with no number in it, iOS lands on WhatsApp's own
+           "open or download" page instead of the app. The share sheet
+           is the same road the film and the notice already take. */
+        var note = document.getElementById('note');
+        var was = note.textContent;
+        if (navigator.share) {
+          navigator.share({ text: made }).catch(function () {
+            note.textContent = was;
+          });
+          return;
+        }
+        /* Older phones: the app's own scheme, then the web address. */
+        var t = encodeURIComponent(made);
+        location.href = 'whatsapp://send?text=' + t;
+        setTimeout(function () {
+          location.href = 'https://wa.me/?text=' + t;
+        }, 900);
         return;
       }
       var k = KIT[what];
