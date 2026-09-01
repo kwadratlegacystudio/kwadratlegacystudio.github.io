@@ -28,6 +28,14 @@
     'th.lede':        ['Museum-grade lineage scrolls and hardcover yichus sefarim, privately commissioned, family by family.',
                        'מגילות יוחסין מהודרות וספרי יוחסין כרוכים, נעשים בהזמנה פרטית ובמלאכה מיוחדת לכל משפחה ומשפחה.',
                        'מייסטערהאפטיגע מגילות יוחסין און הערליכע ספרי יחוס, פראדוצירט אויף פריוואטע באשטעלונג — יעדע משפחה אלס א ווערק פאר זיך.'],
+    /* NOT IN USE. The markup for this was pulled from the hero because
+       the Hebrew and Yiddish were never written, and an English line in
+       a Yiddish hero is worse than no line. Fill the two blanks, then
+       put the <p class="lede scale" data-i18n="th.scale"> back under
+       the sub-line in index.html. */
+    'th.scale':       ['Scrolls of 825 to 1,650 ancestors, researched from documented sources.',
+                       '',
+                       ''],
     'by.pre':         ['by the international renowned',
                        'ע״י המפורסם',
                        'דורך דעם בארומטען'],

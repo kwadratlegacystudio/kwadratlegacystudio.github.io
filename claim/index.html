@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en" data-skin="dark" data-page="document">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Claim a Commission | Kwadrat Legacy Studio</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#141F1D">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" sizes="180x180">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+Hebrew:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+  .claim{ max-width:34rem; margin:0 auto; padding:clamp(28px,7vw,56px) var(--gutter) 96px; }
+  .claim h1{ margin:0 0 10px; }
+  .claim-lede{ color:var(--ink-soft); margin:0 0 28px; }
+  .claim label{ display:block; margin-bottom:18px; }
+  .claim label > span{
+    display:block; font-family:var(--display); font-size:11px;
+    letter-spacing:.22em; text-transform:uppercase; color:var(--ink-faint);
+    margin-bottom:7px;
+  }
+  .claim input[type=text], .claim input[type=tel], .claim textarea{
+    width:100%; padding:12px 14px; font:inherit; font-size:17px;
+    color:var(--ink); background:rgba(245,241,224,.05);
+    border:1px solid var(--line); border-radius:2px;
+  }
+  .claim textarea{ resize:vertical; }
+  .claim input:focus-visible, .claim textarea:focus-visible{
+    outline:2px solid var(--gold); outline-offset:1px;
+  }
+  .claim-declare{
+    display:flex; gap:12px; align-items:flex-start;
+    margin:6px 0 22px; padding:15px 16px;
+    border:1px solid var(--line); border-radius:2px;
+    background:rgba(245,241,224,.04);
+  }
+  .claim-declare input{ margin-top:.32em; flex:0 0 auto; }
+  .claim-declare span{ color:var(--ink-soft); font-size:15px; line-height:1.55; }
+  .claim-note{ color:var(--ink-faint); font-size:14px; margin:18px 0 0; }
+  .pit{ position:absolute; left:-9999px; }
+</style>
+</head>
+<body>
+
+<header class="doc-head">
+  <a class="mark" href="/" aria-label="Kwadrat Legacy Studio">
+    <img src="/assets/img/logo.svg" alt="" class="mark-glyph">
+    <span class="mark-words">
+      <span class="mark-name">Kwadrat</span>
+      <span class="mark-sub">Legacy Studio Ltd</span>
+    </span>
+  </a>
+  <a class="compass-back" href="/referral-terms/">The terms</a>
+</header>
+
+<main class="claim">
+  <h1 class="grand small">Claim a commission.</h1>
+  <!-- HIS WORDS ▼ -->
+  <p class="claim-lede">Send this once the studio has told you a client of yours has
+    ordered. It is what the studio keeps on file against the payment.</p>
+  <!-- HIS WORDS ▲ -->
+
+  <form id="claim-form" name="claim" method="POST" action="https://api.web3forms.com/submit">
+    <input type="hidden" name="access_key" value="69ea5e00-126e-4839-b109-7b617c1cde12">
+    <input type="hidden" name="from_name" value="Kwadrat Legacy Studio">
+    <input type="hidden" name="subject" value="Kwadrat Legacy Studio — Commission Claim">
+    <input type="hidden" name="redirect" value="https://kwadratlegacystudio.com/thank-you/">
+    <p class="pit"><label>Leave this field empty<input name="botcheck" tabindex="-1" autocomplete="off"></label></p>
+
+    <label>
+      <span>Your name</span>
+      <input type="text" name="name" autocomplete="name" required>
+    </label>
+    <label>
+      <span>Your WhatsApp number</span>
+      <input type="tel" name="phone" inputmode="tel" autocomplete="tel" required>
+    </label>
+    <label>
+      <span>Your reference &mdash; the number in your post</span>
+      <input type="text" name="ref" id="ref" inputmode="numeric" required>
+    </label>
+    <label>
+      <span>The client you introduced</span>
+      <input type="text" name="client" required>
+    </label>
+    <label>
+      <span>Anything the studio should know</span>
+      <textarea name="message" rows="3"></textarea>
+    </label>
+
+    <label class="claim-declare">
+      <input type="checkbox" name="declaration" value="confirmed" required>
+      <span>I introduced this client to the studio through my own post, and I claim the
+        commission under the <a class="quiet-link" href="/referral-terms/">referral
+        terms</a>. The commission is paid gross and its tax is mine to account for.</span>
+    </label>
+
+    <div class="refer-do">
+      <button type="submit" class="seal">Send the claim</button>
+    </div>
+    <p class="claim-note">The studio will confirm your bank details with you directly
+      before paying. Do not send them here.</p>
+  </form>
+</main>
+
+<div class="colophon">
+  <span>Private Yichus Works &middot; Prepared with precision, documentation, artistry, and care.</span>
+  <small class="colophon-legal" dir="ltr">Kwadrat Legacy Studio Limited &middot; registered in England and Wales, company number 16606965 &middot; registered office 34 Olinda Road, London N16 6TL</small>
+</div>
+
+<script>
+/* A sharer who reached this page from his own post arrives with the
+   reference already in the address, so he need not remember it. */
+(function () {
+  var m = /[?&]ref=([0-9]{6,15})/.exec(location.search);
+  if (m) document.getElementById('ref').value = m[1];
+}());
+</script>
+
+</body>
+</html>

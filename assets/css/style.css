@@ -435,13 +435,17 @@ img{ max-width:100%; display:block; }
   background:var(--scrim);
   opacity:0; transition:opacity var(--calm) var(--ease);
 }
-.plate:hover .plate-mark, .plate:focus-visible /* A lineage scroll begins on the right and is read leftwards, so when
-   one is too wide for the rail it is the RIGHT edge that must show —
-   the head of the tree, not the middle of it. */
-.plate-scroll img{ object-position:right center; }
-.plate-scroll.reads-ltr img{ object-position:left center; }
-
+/* The count rides in each plate's caption, so it stays on rather than
+   waiting for a hover that a touch screen never sends. */
 .plate-mark{ opacity:1; }
+
+/* The figures sit under the sub-line, a step quieter — a note on the
+   work rather than a second claim competing with the first. */
+.lede.scale{
+  margin-top:.55em;
+  font-size:.86em;
+  color:var(--ink-soft);
+}
 
 .plate-film::after{
   content:""; position:absolute; inset:0; margin:auto;
@@ -1130,7 +1134,10 @@ html.js .works-index{ display:none; }
    /works/ is the opposite: a long read. It opts out by name, so
    nothing else is affected. */
 html[data-page="document"],
-html[data-page="document"] body{ overflow:auto; height:auto; }
+html[data-page="document"] body{
+  overflow:visible !important; height:auto !important;
+  overflow-x:hidden;
+}
 
 .doc-head{
   display:flex; align-items:center; justify-content:space-between; gap:24px;

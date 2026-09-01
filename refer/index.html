@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en" data-skin="dark" data-page="document">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Share the Studio | Kwadrat Legacy Studio</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#141F1D">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" sizes="180x180">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+Hebrew:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+  .refer{ max-width:34rem; margin:0 auto; padding:clamp(28px,7vw,56px) var(--gutter) 96px; }
+  .refer h1{ margin:0 0 10px; }
+  .refer-lede{ color:var(--ink-soft); margin:0 0 26px; }
+  .refer label{ display:block; }
+  .refer label span{
+    display:block; font-family:var(--display); font-size:11px;
+    letter-spacing:.22em; text-transform:uppercase; color:var(--ink-faint);
+    margin-bottom:7px;
+  }
+  .refer input{
+    width:100%; padding:12px 14px; font:inherit; font-size:17px;
+    color:var(--ink); background:rgba(245,241,224,.05);
+    border:1px solid var(--line); border-radius:2px;
+  }
+  .refer-tel{ display:flex; gap:8px; align-items:stretch; }
+  .refer-tel input{ flex:1 1 auto; min-width:0; }
+  .refer select{
+    flex:0 0 auto; width:auto; padding:12px 10px; font:inherit; font-size:17px;
+    text-align:center;
+    color:var(--ink); background:rgba(245,241,224,.05);
+    border:1px solid var(--line); border-radius:2px; appearance:none;
+  }
+  .refer label{ margin-bottom:16px; }
+  .refer input:focus-visible, .refer select:focus-visible{
+    outline:2px solid var(--gold); outline-offset:1px;
+  }
+  .refer-do{ display:flex; flex-wrap:wrap; gap:12px; margin-top:20px; }
+  .refer-said{ font-style:italic; color:var(--gold); min-height:1.4em; margin:12px 0 0; }
+  .refer-post{
+    margin:0; padding:16px 18px;
+    border:1px solid var(--line); border-radius:2px;
+    background:rgba(245,241,224,.04);
+    white-space:pre-wrap; font-size:15px; line-height:1.6; color:var(--ink-soft);
+    word-break:break-word;
+  }
+  .refer-out[hidden]{ display:none; }
+  .refer-out{ margin-top:30px; }
+  .refer-kit{ margin:26px 0 0; padding:0; list-style:none; counter-reset:k; }
+  .refer-kit li{
+    counter-increment:k; position:relative; padding-left:40px; margin-bottom:30px;
+  }
+  .refer-kit li::before{
+    content:counter(k); position:absolute; left:0; top:.1em;
+    font-family:var(--display); font-size:12px; color:var(--gold);
+    border:1px solid var(--line); border-radius:50%;
+    width:25px; height:25px; display:grid; place-items:center;
+  }
+  .refer-kit h2{
+    font-family:var(--display); font-size:12px; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--ink); margin:0 0 5px; font-weight:400;
+  }
+  .refer-kit p{ margin:0 0 10px; color:var(--ink-soft); font-size:15px; }
+  .refer-note{ color:var(--ink-faint); font-size:14px; margin:16px 0 0; }
+</style>
+</head>
+<body>
+
+<header class="doc-head">
+  <a class="mark" href="/" aria-label="Kwadrat Legacy Studio">
+    <img src="/assets/img/logo.svg" alt="" class="mark-glyph">
+    <span class="mark-words">
+      <span class="mark-name">Kwadrat</span>
+      <span class="mark-sub">Legacy Studio Ltd</span>
+    </span>
+  </a>
+</header>
+
+<main class="refer">
+  <h1 class="grand small">Share the studio.</h1>
+  <!-- HIS WORDS ▼ -->
+  <p class="refer-lede">Put your number in, and your post is ready. Anyone who reaches
+    the studio through it is recorded as yours.</p>
+  <!-- HIS WORDS ▲ -->
+
+  <form id="make" novalidate>
+    <label>
+      <span>Your WhatsApp number</span>
+      <div class="refer-tel">
+        <select id="dial" aria-label="Country"></select>
+        <input type="tel" id="mobile" inputmode="tel" autocomplete="tel"
+               placeholder="07974 770973" required>
+      </div>
+    </label>
+    <div class="refer-do">
+      <button type="submit" class="seal">Make my post</button>
+    </div>
+    <p class="refer-said" id="said"></p>
+    <!-- HIS WORDS ▼  Plain and true: nothing here is kept. -->
+    <p class="refer-note">Your number goes into your post so an enquiry can be credited
+      to you, and so the studio can reach you to pay it. The studio keeps no list &mdash;
+      your number is not stored here, and reaches it only when someone you sent writes
+      in.</p>
+    <!-- HIS WORDS ▲ -->
+    <p class="refer-note">Sharing is subject to the
+      <a class="quiet-link" href="/referral-terms/">referral terms</a>.</p>
+  </form>
+
+  <div class="refer-out" id="out" hidden>
+    <p class="refer-note" id="note"></p>
+
+    <ol class="refer-kit">
+      <li>
+        <h2>First &mdash; the film</h2>
+        <p>A scroll of 1,250 ancestors, read at a chasunah.</p>
+        <div class="refer-do">
+          <button class="seal" data-share="video">Share the film</button>
+          <a class="quiet-link" href="/assets/refer/lefkowits.mp4" download>Save it instead</a>
+        </div>
+      </li>
+      <li>
+        <h2>Then &mdash; the notice</h2>
+        <p>Post it straight after the film.</p>
+        <div class="refer-do">
+          <button class="seal" data-share="ad">Share the notice</button>
+          <a class="quiet-link" href="/assets/refer/ad.jpg" download>Save it instead</a>
+        </div>
+      </li>
+      <li>
+        <h2>Last &mdash; your link</h2>
+        <p class="refer-post" id="post" dir="auto"></p>
+        <div class="refer-do">
+          <button class="seal" data-share="link">Share your link</button>
+          <button class="seal" id="copy" style="background:transparent">Copy</button>
+        </div>
+      </li>
+    </ol>
+
+    <p class="refer-note">Post them in that order. The film earns the attention, the
+      notice explains it, and your link is what brings anyone back to the studio as
+      yours.</p>
+  </div>
+
+</main>
+
+<div class="colophon">
+  <span>Private Yichus Works &middot; Prepared with precision, documentation, artistry, and care.</span>
+  <small class="colophon-legal" dir="ltr">Kwadrat Legacy Studio Limited &middot; registered in England and Wales, company number 16606965 &middot; registered office 34 Olinda Road, London N16 6TL</small>
+</div>
+
+<script>
+(function () {
+  var STUDIO  = '447974770973';
+
+  /* Where the studio's people actually are, and a few more besides.
+     A sharer whose country is missing can type a + number, which is
+     taken exactly as written. */
+  var DIAL = [
+    ['GB','🇬🇧','44'],
+    ['US','🇺🇸','1'],
+    ['IL','🇮🇱','972'],
+    ['BE','🇧🇪','32'],
+    ['CA','🇨🇦','1']
+  ];
+
+  /* The browser's own timezone names the country, with no request
+     made and nothing looked up about the person. */
+  var ZONE = {
+    'Europe/London':'GB', 'Europe/Brussels':'BE',
+    'Asia/Jerusalem':'IL', 'Asia/Tel_Aviv':'IL',
+    'America/Toronto':'CA', 'America/Vancouver':'CA', 'America/Montreal':'CA',
+    'America/Winnipeg':'CA', 'America/Edmonton':'CA', 'America/Halifax':'CA'
+  };
+
+  function here() {
+    var z = '';
+    try { z = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+    if (ZONE[z]) return ZONE[z];
+    if (z.indexOf('America/') === 0) return 'US';
+    return 'GB';
+  }
+
+  var picker = document.getElementById('dial');
+  DIAL.forEach(function (c) {
+    var o = document.createElement('option');
+    o.value = c[2]; o.setAttribute('data-cc', c[0]);
+    o.textContent = c[1] + ' +' + c[2];
+    picker.appendChild(o);
+  });
+  (function () {
+    var cc = here();
+    for (var i = 0; i < DIAL.length; i++) {
+      if (DIAL[i][0] === cc) { picker.selectedIndex = i; return; }
+    }
+  }());
+
+  /* ── HIS WORDS ────────────────────────────────────────────────────
+     Placeholder. {link} becomes the sharer's own link and should sit
+     on its own line, so WhatsApp renders it as a tappable preview. */
+  var POST = [
+    'יחוס ירש׳נט מען טאקע.',
+    'אבער דאס צו פאראייביגן - איז א באשלוס.',
+    '',
+    '{link}'
+  ].join('\n');
+  /* ─────────────────────────────────────────────────────────────── */
+
+  var form = document.getElementById('make');
+  var field = document.getElementById('mobile');
+  var said = document.getElementById('said');
+  var out  = document.getElementById('out');
+
+  /* WhatsApp wants digits only, with the country and no leading zero.
+     People type all of 07974…, +44 7974…, 0044…, and 44…; all four
+     have to end at the same number or the commission goes astray. */
+  function tidy(raw) {
+    var t = (raw || '').trim();
+    var d = t.replace(/\D+/g, '');
+    var code = picker.value;
+    if (!d) return '';
+    if (t.charAt(0) === '+') return d;          /* written in full already */
+    if (d.slice(0, 2) === '00') return d.slice(2);
+    if (d.charAt(0) === '0') return code + d.slice(1);
+    if (d.indexOf(code) === 0) return d;        /* already carries its country */
+    return code + d;
+  }
+
+  var made = '';
+  function build(num) {
+    /* The whole number travels. Anyone who can see a sharer's status is
+       already one of his contacts, so it is not disclosed to anybody who
+       did not have it — and the studio has to be able to ring him to
+       pay, which a partial number does not allow. */
+    var ref = num;
+    /* ── HIS WORDS ▼  What the client's message says when it opens.
+       It has to read like the beginning of a conversation, not a code:
+       he is the one sending it, and he should not have to think of an
+       opening line himself. The reference sits on its own line so it
+       survives whatever he types underneath. */
+    var opener = [
+      'Kwadrat Legacy Studio enquiry',
+      'Referred by: ' + ref,
+      '',
+      'I am interested in commissioning a family tree.'
+    ].join('\n');
+    /* ── HIS WORDS ▲ */
+    var link = 'https://wa.me/' + STUDIO + '?text=' + encodeURIComponent(opener);
+    made = POST.replace('{link}', link);
+    document.getElementById('post').textContent = made;
+    document.getElementById('note').textContent =
+      'Your posts carry +' + num +
+      '  —  every enquiry through them reaches the studio marked as yours.';
+    out.hidden = false;
+    try { localStorage.setItem('kwadrat-sharer', num); } catch (e) {}
+  }
+
+  /* Hand the phone a file and let WhatsApp take it from there. The
+     share sheet is the only route to a status: nothing may post to one
+     directly, so the sharer always chooses My Status himself. */
+  function shareFile(url, name, type, label) {
+    var note = document.getElementById('note');
+    var was = note.textContent;
+    note.textContent = 'Preparing ' + label + '…';
+    fetch(url).then(function (r) { return r.blob(); }).then(function (blob) {
+      var file = new File([blob], name, { type: type });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        return navigator.share({ files: [file] }).then(function () {
+          note.textContent = was;
+        });
+      }
+      throw new Error('no file sharing');
+    }).catch(function () {
+      /* An older phone, or a share the sharer cancelled. Saving it and
+         posting from the gallery reaches the same place. */
+      note.textContent = 'This phone cannot hand files to WhatsApp directly — use “Save it instead”, then post it from your gallery.';
+    });
+  }
+
+  var KIT = {
+    video: ['/assets/refer/lefkowits.mp4', 'lefkowits.mp4', 'video/mp4', 'the film'],
+    ad:    ['/assets/refer/ad.jpg', 'kwadrat.jpg', 'image/jpeg', 'the notice']
+  };
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-share]'), function (b) {
+    b.addEventListener('click', function () {
+      var what = b.getAttribute('data-share');
+      if (what === 'link') {
+        location.href = 'https://wa.me/?text=' + encodeURIComponent(made);
+        return;
+      }
+      var k = KIT[what];
+      shareFile(k[0], k[1], k[2], k[3]);
+    });
+  });
+
+  document.getElementById('copy').addEventListener('click', function () {
+    var note = document.getElementById('note');
+    var was = note.textContent;
+    navigator.clipboard.writeText(made).then(function () {
+      note.textContent = 'Copied. Paste it into your status.';
+      setTimeout(function () { note.textContent = was; }, 3000);
+    }, function () {
+      note.textContent = 'Select the text above and copy it.';
+    });
+  });
+
+  /* A sharer who comes back gets his post without typing again. */
+  try {
+    var again = localStorage.getItem('kwadrat-sharer');
+    if (again) { field.value = '+' + again; build(again); }
+  } catch (e) {}
+}());
+</script>
+
+</body>
+</html>
