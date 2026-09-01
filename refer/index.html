@@ -259,6 +259,20 @@
     try { localStorage.setItem('kwadrat-sharer', num); } catch (e) {}
   }
 
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var num = tidy(field.value);
+    /* Long enough to be a real mobile, short enough to be a phone. */
+    if (num.length < 9 || num.length > 15) {
+      said.textContent = 'That does not look like a mobile number. Check the country beside it.';
+      field.focus();
+      return;
+    }
+    said.textContent = '';
+    build(num);
+    out.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
   /* Hand the phone a file and let WhatsApp take it from there. The
      share sheet is the only route to a status: nothing may post to one
      directly, so the sharer always chooses My Status himself. */
