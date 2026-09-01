@@ -1074,8 +1074,6 @@
       body.append('from_name', 'Kwadrat Legacy Studio');
       body.append('name',     value('name'));
       body.append('email',    value('email'));
-      /* So a reply goes to the enquirer rather than to the endpoint. */
-      body.append('replyto',  value('email'));
       body.append('phone',    value('phone'));
       body.append('message',  value('message'));
       body.append('botcheck', value('botcheck'));
