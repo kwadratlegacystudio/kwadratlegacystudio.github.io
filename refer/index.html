@@ -93,7 +93,13 @@
     <label>
       <span>Your WhatsApp number</span>
       <div class="refer-tel">
-        <select id="dial" aria-label="Country"></select>
+        <select id="dial" aria-label="Country">
+          <option value="44" data-cc="GB">🇬🇧 +44</option>
+          <option value="1"  data-cc="US">🇺🇸 +1</option>
+          <option value="972" data-cc="IL">🇮🇱 +972</option>
+          <option value="32" data-cc="BE">🇧🇪 +32</option>
+          <option value="1"  data-cc="CA">🇨🇦 +1</option>
+        </select>
         <input type="tel" id="mobile" inputmode="tel" autocomplete="tel"
                placeholder="07974 770973" required>
       </div>
@@ -163,16 +169,6 @@
 (function () {
   var STUDIO  = '447974770973';
 
-  /* Where the studio's people actually are, and a few more besides.
-     A sharer whose country is missing can type a + number, which is
-     taken exactly as written. */
-  var DIAL = [
-    ['GB','🇬🇧','44'],
-    ['US','🇺🇸','1'],
-    ['IL','🇮🇱','972'],
-    ['BE','🇧🇪','32'],
-    ['CA','🇨🇦','1']
-  ];
 
   /* The browser's own timezone names the country, with no request
      made and nothing looked up about the person. */
@@ -191,17 +187,13 @@
     return 'GB';
   }
 
+  /* The options are in the markup, so the field cannot change width
+     when the script runs. All this does is pick the right one. */
   var picker = document.getElementById('dial');
-  DIAL.forEach(function (c) {
-    var o = document.createElement('option');
-    o.value = c[2]; o.setAttribute('data-cc', c[0]);
-    o.textContent = c[1] + ' +' + c[2];
-    picker.appendChild(o);
-  });
   (function () {
-    var cc = here();
-    for (var i = 0; i < DIAL.length; i++) {
-      if (DIAL[i][0] === cc) { picker.selectedIndex = i; return; }
+    var cc = here(), opts = picker.options;
+    for (var i = 0; i < opts.length; i++) {
+      if (opts[i].getAttribute('data-cc') === cc) { picker.selectedIndex = i; return; }
     }
   }());
 

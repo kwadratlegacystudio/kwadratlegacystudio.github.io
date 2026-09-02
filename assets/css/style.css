@@ -618,6 +618,10 @@ img{ max-width:100%; display:block; }
   display:block;
   margin-top:4px;
   font-style:normal;
+  /* A system serif on purpose. Inheriting the page's web font means this
+     line re-wraps the moment EB Garamond arrives, and a fixed strip at
+     the foot of every page is the worst place for that. */
+  font-family:Georgia,"Times New Roman",serif;
   font-size:clamp(9px,.62vw,10.5px);
   letter-spacing:.015em;
   opacity:.72;
@@ -681,7 +685,10 @@ img{ max-width:100%; display:block; }
   -webkit-touch-callout:none;
   pointer-events:none;      /* a page is looked at, not handled */
 }
-.leafsheet.is-shown{ opacity:1; }
+/* Both classes, on purpose. A sheet arrives with no known size, so the
+   viewer measures and places it once the picture has loaded — and that
+   move must happen while it is still invisible. */
+.leafsheet.is-shown.is-ready{ opacity:1; }
 
 /* An opening: one page, or two laid side by side as a book falls open.
    A Hebrew book reads right to left, so the earlier page sits on the
