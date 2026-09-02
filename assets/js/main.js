@@ -651,7 +651,7 @@
     var fr = frames(item);
     openingsOf(item).forEach(function (group, n) {
       var box = document.createElement('div');
-      box.className = 'opening leafsheet' + (n === 0 ? ' is-shown' : '');
+      box.className = 'opening leafsheet is-holding' + (n === 0 ? ' is-shown' : '');
       if (rtl) box.classList.add('reads-rtl');
       box.dataset.pages = group.map(function (i) { return fr[i].page || (i + 1); }).join('–');
       box.dataset.section = group.map(function (i) { return fr[i].section || ''; })
@@ -669,14 +669,14 @@
           if (f.poster) el.poster = url(f.poster);
           if (n === 0) el.src = url(f.src); else el.dataset.src = url(f.src);
           box.classList.add('has-film');
-          box.classList.add('is-ready');
+          box.classList.remove('is-holding');
         } else {
           el = document.createElement('img');
           el.alt = item.title + (fr.length > 1 ? ', page ' + (f.page || (i + 1)) : '');
           el.draggable = false;
           el.addEventListener('load', function () {
             if (sheets[leaf] === box) { setCeiling(); fit(false); }
-            box.classList.add('is-ready');
+            box.classList.remove('is-holding');
           });
           if (n < 2) el.src = url(f.src); else el.dataset.src = url(f.src);
         }
@@ -691,7 +691,7 @@
     /* If a picture never arrives, the sheet is still shown rather than
        left blank. Late enough that a normal load has already revealed it. */
     setTimeout(function () {
-      sheets.forEach(function (b) { b.classList.add('is-ready'); });
+      sheets.forEach(function (b) { b.classList.remove('is-holding'); });
     }, 1500);
 
     leafBox.hidden = sheets.length < 2;

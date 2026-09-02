@@ -17,7 +17,7 @@
   --paper:      #141F1D;   /* the ground: the brand ink, one notch deeper */
   --paper-lift: #1B2B28;   /* the surface an image sits on */
   --ink:        #F5F1E0;   /* parchment, for type */
-  --ink-soft:   rgba(245,241,224,.80);
+  --ink-soft:   rgba(245,241,224,.88);
   --ink-faint:  rgba(245,241,224,.70);
   --gold:       #C59707;   /* the gold of the mark itself */
   --gold-quiet: #C59707;
@@ -46,7 +46,7 @@ html[data-skin="light"]{
   --paper:      #F5F1E0;
   --paper-lift: #FBF8EF;
   --ink:        #1B2B28;
-  --ink-soft:   rgba(27,43,40,.82);
+  --ink-soft:   rgba(27,43,40,.90);
   --ink-faint:  rgba(27,43,40,.74);
   --gold:       #BC8811;   /* full gold, for rules and the mark */
   --gold-quiet: #8A6410;   /* darkened, so small tracked caps stay legible */
@@ -71,7 +71,7 @@ body{
   background:var(--paper);
   color:var(--ink);
   font-family:var(--serif);
-  font-size:clamp(16px,1.05vw,19px);
+  font-size:clamp(17.5px,1.05vw,19px);
   line-height:1.65;
   font-weight:400;
   -webkit-font-smoothing:antialiased;
@@ -153,7 +153,7 @@ img{ max-width:100%; display:block; }
 
 .eyebrow{
   font-family:var(--display);
-  font-size:clamp(10px,.78vw,12px);
+  font-size:clamp(11px,.78vw,12px);
   letter-spacing:.34em;
   text-transform:uppercase;
   color:var(--gold-quiet);
@@ -169,7 +169,7 @@ img{ max-width:100%; display:block; }
 .rule.left{ margin-left:0; margin-right:auto; width:min(190px,34vw); }
 
 .lede{
-  font-size:clamp(17px,1.5vw,23px);
+  font-size:clamp(19px,1.5vw,23px);
   line-height:1.55;
   color:var(--ink-soft);
   max-width:34em;
@@ -178,7 +178,7 @@ img{ max-width:100%; display:block; }
 
 .quiet-link{
   font-family:var(--display);
-  font-size:clamp(10px,.8vw,12px);
+  font-size:clamp(11px,.8vw,12px);
   letter-spacing:.30em;
   text-transform:uppercase;
   color:var(--ink-soft);
@@ -203,11 +203,11 @@ img{ max-width:100%; display:block; }
 .mark:hover .mark-glyph{ opacity:1; }
 .mark-words{ display:grid; gap:3px; }
 .mark-name{
-  font-family:var(--display); font-size:clamp(13px,1.05vw,16px);
+  font-family:var(--display); font-size:clamp(14px,1.05vw,16px);
   letter-spacing:.24em; line-height:1;
 }
 .mark-sub{
-  font-family:var(--display); font-size:clamp(8px,.62vw,9.5px);
+  font-family:var(--display); font-size:clamp(10px,.62vw,9.5px);
   letter-spacing:.24em; line-height:1; color:var(--ink-faint);
 }
 
@@ -218,7 +218,7 @@ img{ max-width:100%; display:block; }
 .compass a{
   position:relative;
   font-family:var(--display);
-  font-size:clamp(11px,.85vw,13px);
+  font-size:clamp(12px,.85vw,13px);
   letter-spacing:.22em; text-transform:uppercase;
   color:var(--ink-faint);
   line-height:1;
@@ -342,13 +342,13 @@ img{ max-width:100%; display:block; }
 .attribution-pre,
 .attribution-role{
   font-family:var(--display);
-  font-size:clamp(10px,.76vw,12px);
+  font-size:clamp(11px,.76vw,12px);
   letter-spacing:.28em; text-transform:uppercase;
   color:var(--ink-faint);
 }
 .attribution-name{
   font-family:var(--display);
-  font-size:clamp(17px,2vw,31px);
+  font-size:clamp(18px,2vw,31px);
   letter-spacing:.10em; text-transform:uppercase;
   color:var(--ink);
   line-height:1.25;
@@ -369,7 +369,7 @@ img{ max-width:100%; display:block; }
 .ledger-tab{
   appearance:none; background:none; border:0; cursor:pointer;
   font-family:var(--display);
-  font-size:clamp(11px,.85vw,13px);
+  font-size:clamp(12px,.85vw,13px);
   letter-spacing:.26em; text-transform:uppercase;
   color:var(--ink-faint);
   padding:0 0 8px;
@@ -481,11 +481,11 @@ img{ max-width:100%; display:block; }
   padding-inline:clamp(6px,3vw,52px);
 }
 .tally{
-  font-family:var(--display); font-size:clamp(10px,.78vw,12px);
+  font-family:var(--display); font-size:clamp(11px,.78vw,12px);
   letter-spacing:.26em; color:var(--gold);
 }
 .hint{
-  font-size:clamp(11px,.82vw,13px); font-style:italic; color:var(--ink-faint);
+  font-size:clamp(12px,.82vw,13px); font-style:italic; color:var(--ink-faint);
 }
 .rail-empty{
   margin:auto; text-align:center; font-style:italic; color:var(--ink-faint);
@@ -521,10 +521,10 @@ img{ max-width:100%; display:block; }
 [dir="rtl"] .at-work figcaption{ letter-spacing:.14em; }
 .standard-inner .eyebrow{ margin-bottom:clamp(16px,2.6vh,30px); }
 .tenets{ display:grid; gap:clamp(16px,2.4vh,30px); }
-.tenets p{ font-size:clamp(16px,1.32vw,21px); line-height:1.6; color:var(--ink-soft); }
+.tenets p{ font-size:clamp(17.5px,1.32vw,21px); line-height:1.6; color:var(--ink-soft); }
 .threshold-note{
   font-family:var(--display);
-  font-size:clamp(11px,.86vw,13px) !important;
+  font-size:clamp(12px,.86vw,13px) !important;
   letter-spacing:.20em; text-transform:uppercase;
   color:var(--ink-soft) !important;
   padding-top:clamp(10px,1.8vh,22px);
@@ -584,7 +584,7 @@ img{ max-width:100%; display:block; }
   border:1px solid var(--ink);
   padding:14px 34px;
   font-family:var(--display);
-  font-size:clamp(10px,.78vw,12px);
+  font-size:clamp(11px,.78vw,12px);
   letter-spacing:.26em; text-transform:uppercase;
   transition:background var(--calm) var(--ease), color var(--calm) var(--ease), border-color var(--calm) var(--ease);
 }
@@ -689,10 +689,13 @@ img{ max-width:100%; display:block; }
   -webkit-touch-callout:none;
   pointer-events:none;      /* a page is looked at, not handled */
 }
-/* Both classes, on purpose. A sheet arrives with no known size, so the
-   viewer measures and places it once the picture has loaded — and that
-   move must happen while it is still invisible. */
-.leafsheet.is-shown.is-ready{ opacity:1; }
+.leafsheet.is-shown{ opacity:1; }
+/* A sheet arrives with no known size and is measured once its picture
+   loads, so the script holds it back until it has been placed. Written
+   as a class that HIDES rather than one that shows: script and stylesheet
+   are cached separately, and a visitor holding one old file must still
+   see the sheet. Failing open is the whole point of this rule. */
+.leafsheet.is-holding{ opacity:0; }
 
 /* An opening: one page, or two laid side by side as a book falls open.
    A Hebrew book reads right to left, so the earlier page sits on the
@@ -874,7 +877,7 @@ img{ max-width:100%; display:block; }
   gap:clamp(14px,2.6vw,40px); flex-wrap:wrap;
   padding:clamp(14px,2.2vh,26px) clamp(46px,7vw,110px) clamp(18px,3vh,34px);
   font-family:var(--display);
-  font-size:clamp(10px,.78vw,12px);
+  font-size:clamp(11px,.78vw,12px);
   letter-spacing:.24em; text-transform:uppercase;
   color:var(--ink-soft);
 }
@@ -1157,7 +1160,7 @@ html[data-page="document"] body{
 }
 .compass-back{
   font-family:var(--display);
-  font-size:clamp(10px,.78vw,12px);
+  font-size:clamp(11px,.78vw,12px);
   letter-spacing:.22em; text-transform:uppercase;
   color:var(--ink-faint);
   transition:color var(--calm) var(--ease);
