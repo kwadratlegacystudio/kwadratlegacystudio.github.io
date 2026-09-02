@@ -402,6 +402,10 @@ img{ max-width:100%; display:block; }
 .plate{
   position:relative; flex:0 0 auto;
   height:100%;
+  /* A floor, for the case where a cover's shape is unknown: narrower
+     than any real plate, so it never distorts one, but wide enough that
+     the rail cannot fold in on itself. */
+  min-width:clamp(80px,9vw,140px);
   /* No single work may swallow the whole rail. */
   max-width:min(62vw, 860px);
   background:none; border:0; padding:0;

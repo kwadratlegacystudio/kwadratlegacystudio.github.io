@@ -95,6 +95,10 @@
     b.setAttribute('aria-label', 'Open ' + item.title);
 
     var img = document.createElement('img');
+    /* The cover's own shape, measured at publish. The browser needs it to
+       give the plate a width before the picture lands — without it every
+       plate is zero wide until then, and they collapse onto each other. */
+    if (item.cw && item.ch) { img.width = item.cw; img.height = item.ch; }
     img.src = url(cover(item));
     img.alt = item.title;
     img.loading = i < 3 ? 'eager' : 'lazy';
