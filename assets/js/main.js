@@ -431,10 +431,17 @@
     });
     if (!imgs.length) { MAX = 7; return; }
 
+    // Measure the MASTER, whose size is declared on the sheet even when
+    // what is loaded is only the reading copy. Otherwise the ceiling
+    // would fall to the stand-in's resolution and the loupe would stop
+    // short of the detail the work actually holds.
+    function fullW(el) { return +el.dataset.fullw || el.naturalWidth; }
+    function fullH(el) { return +el.dataset.fullh || el.naturalHeight; }
+
     var tall = 0, wide = 0, i;
-    for (i = 0; i < imgs.length; i++) tall = Math.max(tall, imgs[i].naturalHeight);
+    for (i = 0; i < imgs.length; i++) tall = Math.max(tall, fullH(imgs[i]));
     for (i = 0; i < imgs.length; i++) {
-      wide += imgs[i].naturalWidth * (tall / imgs[i].naturalHeight);
+      wide += fullW(imgs[i]) * (tall / fullH(imgs[i]));
     }
 
     var vw = view.clientWidth, vh = view.clientHeight;
@@ -444,8 +451,37 @@
 
     var dpr = window.devicePixelRatio || 1;
     MAX = Math.max(2, Math.min(24, (wide / baseW / dpr) * 1.05));
+
+    /* Where the magnification stops being served by the reading copy.
+       One sheet is the case that matters — a rendered scroll — and for
+       anything more complicated the master is fetched on the first
+       gesture rather than guessed at. */
+    CAP = 0;
+    if (imgs.length === 1 && imgs[0].dataset.full && baseW) {
+      CAP = (imgs[0].naturalWidth / baseW) / dpr;
+    }
   }
-  var scale = 1, tx = 0, ty = 0;
+
+  /* Fetch the master, once, and swap it in only when it has arrived —
+     assigning src directly would blank the sheet while it loaded. */
+  function outgrow() {
+    var box = sheets[leaf];
+    if (!box) return;
+    Array.prototype.forEach.call(box.children, function (el) {
+      if (el.tagName !== 'IMG' || !el.dataset.full) return;
+      if (CAP && scale < CAP * 0.95) return;
+      var master = el.dataset.full;
+      delete el.dataset.full;              // asked for once, whatever happens
+      var full = new Image();
+      full.decoding = 'async';
+      full.onload = function () {
+        el.src = master;
+        if (sheets[leaf] === box) setCeiling();
+      };
+      full.src = master;
+    });
+  }
+  var scale = 1, tx = 0, ty = 0, CAP = 0;
 
   function isOpen() { return !vitrine.hidden; }
 
@@ -468,6 +504,7 @@
     zoomIn.disabled  = scale >= MAX - 0.001;
     view.classList.toggle('is-flat', scale <= MIN + 0.001);
     view.classList.toggle('is-turnable', sheets.length > 1 && scale <= MIN + 0.01);
+    if (scale > MIN + 0.01) outgrow();
     markPage();
   }
 
@@ -674,15 +711,41 @@
           el = document.createElement('img');
           el.alt = item.title + (fr.length > 1 ? ', page ' + (f.page || (i + 1)) : '');
           el.draggable = false;
+          el.decoding = 'async';
           el.addEventListener('load', function () {
             if (sheets[leaf] === box) { setCeiling(); fit(false); }
             box.classList.remove('is-holding');
           });
-          if (n < 2) el.src = url(f.src); else el.dataset.src = url(f.src);
+          /* The master of a rendered scroll is forty to seventy
+             megapixels and ten megabytes. Opening a work used to fetch
+             and decode the whole of that before anything appeared. What
+             loads now is the reading copy; the master is kept in hand
+             and fetched only if someone magnifies past what the reading
+             copy can resolve. Its declared size travels with it, so the
+             zoom ceiling is still the master's and not the stand-in's. */
+          var wanted = url(f.src);
+          if (f.screen) {
+            el.dataset.full = wanted;
+            if (f.w) el.dataset.fullw = f.w;
+            if (f.h) el.dataset.fullh = f.h;
+            wanted = url(f.screen);
+          }
+          if (n < 2) el.src = wanted; else el.dataset.src = wanted;
         }
         el.className = 'sheet';
         box.appendChild(el);
       });
+
+      /* A single-sheet work has a thumbnail already fetched and decoded
+         for the rail. Painting it behind the frame means the picture is
+         there the instant the viewer opens — soft, but at fit size on
+         most screens barely distinguishable — and the sheet proper
+         fades in over it. Only where the thumbnail IS this sheet: a
+         second page must not wear the first page's face. */
+      if (fr.length === 1 && item.cover && !box.classList.contains('has-film')) {
+        box.style.backgroundImage = 'url("' + url(item.cover).replace(/"/g, '\\"') + '")';
+        box.classList.add('has-stand-in');
+      }
 
       canvas.appendChild(box);
       sheets.push(box);

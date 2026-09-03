@@ -700,6 +700,19 @@ img{ max-width:100%; display:block; }
    see the sheet. Failing open is the whole point of this rule. */
 .leafsheet.is-holding{ opacity:0; }
 
+/* Unless a stand-in is already in hand. The rail's thumbnail has been
+   fetched and decoded before the visitor ever clicks, so the frame can
+   show it at once and let the sheet proper arrive over the top. The
+   frame is no longer empty while ten megabytes are in flight. */
+.leafsheet.has-stand-in{
+  background-size:100% 100%;
+  background-repeat:no-repeat;
+  background-position:center;
+}
+.leafsheet.is-holding.has-stand-in{ opacity:1; }
+.leafsheet.is-holding.has-stand-in .sheet{ opacity:0; }
+.leafsheet.has-stand-in .sheet{ transition:opacity var(--calm) var(--ease); }
+
 /* An opening: one page, or two laid side by side as a book falls open.
    A Hebrew book reads right to left, so the earlier page sits on the
    right and the pair is laid out in reverse. */
