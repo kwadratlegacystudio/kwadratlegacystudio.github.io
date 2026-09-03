@@ -1,0 +1,11 @@
+# The companies Kwadrat Legacy Studio deals with.
+#
+# One company per line:
+#
+#     Name | https://address | one line about what they do
+#
+# The note is optional. Lines starting with # are ignored, blank lines
+# too, and the order here is the order on the page. Add a line, run
+# publish.command, and /partners/ is rebuilt with it.
+
+LegacyTaleCraft | https://www.legacytalecraft.com/en/ | Family-led memoir books. Relatives contribute their stories and photographs, and the studio shapes them into one printed keepsake.

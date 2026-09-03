@@ -1224,6 +1224,14 @@ html[data-page="document"] .works-index h2{ margin-top:2.6em; }
 /* The way through to /works/, kept as quiet as the colophon it sits
    above. It is a real link on a real page — not hidden text. */
 .colophon-link{
+  /* The colophon itself takes no pointer, so that a strip pinned across
+     the foot of every room does not swallow clicks meant for the work
+     behind it. A real link inside it has to ask for them back. */
+  pointer-events:auto;
+  /* Its own line under the italic sentence, not trailing off the end
+     of it: this is tracked capitals against an italic serif. */
+  display:block; width:fit-content; margin:7px auto 0;
+  font-style:normal;
   font-family:var(--display);
   font-size:clamp(12px,.8vw,13px);
   letter-spacing:.26em; text-transform:uppercase;
