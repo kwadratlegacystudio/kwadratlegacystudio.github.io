@@ -100,6 +100,13 @@
        plate is zero wide until then, and they collapse onto each other. */
     if (item.cw && item.ch) { img.width = item.cw; img.height = item.ch; }
     img.src = url(cover(item));
+    /* A plate is 860 CSS px on a desktop and about a third of that on a
+       handset. Offered both widths, the browser takes the one it needs
+       instead of the one that looks best on the largest screen. */
+    if (item.coverSm) {
+      img.srcset = url(item.coverSm) + ' 800w, ' + url(cover(item)) + ' 1400w';
+      img.sizes = '(max-width:640px) 92vw, (max-width:1100px) 60vw, 860px';
+    }
     img.alt = item.title;
     img.loading = i < 3 ? 'eager' : 'lazy';
     img.decoding = 'async';
