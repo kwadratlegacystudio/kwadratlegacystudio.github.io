@@ -207,7 +207,7 @@ img{ max-width:100%; display:block; }
   letter-spacing:.24em; line-height:1;
 }
 .mark-sub{
-  font-family:var(--display); font-size:clamp(10px,.62vw,9.5px);
+  font-family:var(--display); font-size:clamp(11px,.7vw,12px);
   letter-spacing:.24em; line-height:1; color:var(--ink-faint);
 }
 
@@ -434,7 +434,7 @@ img{ max-width:100%; display:block; }
   position:absolute; left:0; right:0; bottom:0;
   padding:11px 14px;
   font-family:var(--display);
-  font-size:11px; letter-spacing:.22em; text-transform:uppercase;
+  font-size:clamp(12.5px,.95vw,14px); letter-spacing:.17em; text-transform:uppercase;
   color:#F5F1E0;
   background:var(--scrim);
   opacity:0; transition:opacity var(--calm) var(--ease);
@@ -481,7 +481,7 @@ img{ max-width:100%; display:block; }
   padding-inline:clamp(6px,3vw,52px);
 }
 .tally{
-  font-family:var(--display); font-size:clamp(11px,.78vw,12px);
+  font-family:var(--display); font-size:clamp(12px,.84vw,13.5px);
   letter-spacing:.26em; color:var(--gold);
 }
 .hint{
@@ -514,8 +514,8 @@ img{ max-width:100%; display:block; }
 }
 .at-work figcaption{
   font-family:var(--display);
-  font-size:clamp(9px,.68vw,10.5px);
-  letter-spacing:.24em; text-transform:uppercase;
+  font-size:clamp(11px,.8vw,12.5px);
+  letter-spacing:.19em; text-transform:uppercase;
   color:var(--ink-faint);
 }
 [dir="rtl"] .at-work figcaption{ letter-spacing:.14em; }
@@ -554,7 +554,7 @@ img{ max-width:100%; display:block; }
 .field{ display:grid; gap:6px; margin-bottom:clamp(14px,2.4vh,26px); }
 .field > span{
   font-family:var(--display);
-  font-size:clamp(9.5px,.72vw,11px);
+  font-size:clamp(11.5px,.85vw,13px);
   letter-spacing:.24em; text-transform:uppercase;
   color:var(--ink-faint);
   transition:color var(--calm) var(--ease);
@@ -609,8 +609,8 @@ img{ max-width:100%; display:block; }
   padding:0 var(--gutter) clamp(18px,3vh,30px);
   text-align:center;
   font-style:italic;
-  font-size:clamp(10px,.76vw,12.5px);
-  color:var(--ink-faint);
+  font-size:clamp(12.5px,.9vw,14px);
+  color:var(--ink-soft);
   pointer-events:none;
 }
 
@@ -626,9 +626,12 @@ img{ max-width:100%; display:block; }
      line re-wraps the moment EB Garamond arrives, and a fixed strip at
      the foot of every page is the worst place for that. */
   font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(9px,.62vw,10.5px);
+  font-size:clamp(11px,.74vw,12px);
   letter-spacing:.015em;
-  opacity:.72;
+  /* A step quieter than the line above, set as a colour rather than an
+     opacity: opacity here multiplied with the colophon's own translucent
+     ink and left this at about half strength. */
+  color:var(--ink-faint);
 }
 
 /* ── The vitrine ─────────────────────────────────────────────────
@@ -765,7 +768,7 @@ img{ max-width:100%; display:block; }
 }
 .door-source{
   font-family:var(--display);
-  font-size:clamp(8.5px,.64vw,10px);
+  font-size:clamp(10.5px,.74vw,11.5px);
   letter-spacing:.28em; text-transform:uppercase;
   color:var(--gold-quiet);
 }
@@ -827,7 +830,7 @@ img{ max-width:100%; display:block; }
 
 .reading-source{
   font-family:var(--display);
-  font-size:clamp(9.5px,.74vw,11.5px);
+  font-size:clamp(11px,.8vw,12.5px);
   letter-spacing:.30em; text-transform:uppercase;
   color:var(--gold-quiet);
   margin-bottom:clamp(10px,1.6vh,18px);
@@ -886,7 +889,7 @@ img{ max-width:100%; display:block; }
 .vitrine-works{ display:flex; align-items:center; gap:12px; }
 .work-step{
   appearance:none; cursor:pointer; background:none; border:0;
-  color:var(--ink-faint); font:inherit; font-size:13px; letter-spacing:0;
+  color:var(--ink-faint); font:inherit; font-size:14.5px; letter-spacing:0;
   padding:4px 2px;
   transition:color var(--calm) var(--ease);
 }
@@ -937,7 +940,7 @@ img{ max-width:100%; display:block; }
   .hint{ display:none; }
   .works-foot{ justify-content:center; }
   .rail-arrow{ display:none; }
-  .colophon{ font-size:9.5px; padding-bottom:14px; }
+  .colophon{ font-size:12px; padding-bottom:14px; }
 }
 
 /* On a phone the wordmark and the navigation fight for one line and
@@ -1077,7 +1080,7 @@ html.js .works-index{ display:none; }
   .eyebrow         { font-size:12px; letter-spacing:.26em; }
   .hint            { font-size:13px; }
   .tally           { font-size:12px; letter-spacing:.20em; }
-  .colophon        { font-size:11.5px; }
+  .colophon        { font-size:12px; }
   .plate-mark      { font-size:12.5px; letter-spacing:.16em; }
 
   .door-source     { font-size:11.5px; letter-spacing:.20em; }
@@ -1202,7 +1205,7 @@ html[data-page="document"] .works-index h2{ margin-top:2.6em; }
    above. It is a real link on a real page — not hidden text. */
 .colophon-link{
   font-family:var(--display);
-  font-size:clamp(9px,.68vw,10.5px);
+  font-size:clamp(10.5px,.74vw,11.5px);
   letter-spacing:.26em; text-transform:uppercase;
   color:var(--ink-faint);
   border-bottom:1px solid var(--line);
