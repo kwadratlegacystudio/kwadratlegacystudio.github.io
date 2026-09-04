@@ -194,8 +194,24 @@
     return f.length + ' pieces';
   }
 
+  /* A change of tongue used to repaint the whole rail. paint() begins by
+     emptying it, which takes every plate out of the document while its
+     cover is still arriving — and a browser abandons the request for an
+     image that has left the page. The covers came back blank, and only
+     a reload cured it, because by then they were in the cache and the
+     second set resolved before anything could interrupt it. It showed
+     on /he/ and /yi/ every time and on / almost never, since a language
+     page always applies a language and so always fires this.
+
+     Nothing inside a plate is translated — not the title, not the count,
+     not the address on a card. Only the line beneath the rail is, so
+     only that is said again. */
   document.addEventListener('kwadrat:tongue', function () {
-    if (GROUPS[group]) paint(group);   // never before the rail has a group
+    if (!GROUPS[group]) return;        // never before the rail has a group
+    var note = document.querySelector('.hint');
+    if (note) note.textContent = T('hint.' + group, null, GROUPS[group].hint);
+    var bare = rail.querySelector('.rail-empty');
+    if (bare) bare.textContent = T('works.empty', null, 'This portfolio is being prepared.');
   });
 
   function paint(name) {
