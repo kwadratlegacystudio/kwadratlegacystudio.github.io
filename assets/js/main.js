@@ -449,8 +449,11 @@
 
     // Natural size of the whole opening: pages laid side by side, brought
     // to a common height.
+    // A sheet counts once it knows its size, whether because the
+    // picture has arrived or because the manifest declared it.
     var imgs = Array.prototype.filter.call(box.children, function (el) {
-      return el.tagName === 'IMG' && el.naturalWidth;
+      return el.tagName === 'IMG' &&
+             (el.naturalWidth || (+el.dataset.fullw && +el.dataset.fullh));
     });
     if (!imgs.length) { MAX = 7; return; }
 
@@ -746,11 +749,15 @@
              and fetched only if someone magnifies past what the reading
              copy can resolve. Its declared size travels with it, so the
              zoom ceiling is still the master's and not the stand-in's. */
+          /* The picture's real size, declared at publish. It gives the
+             sheet its dimensions before the picture arrives — without
+             it the sheet has no size until the moment it loads, and
+             then snaps to full size under the reader. */
+          if (f.w) el.dataset.fullw = f.w;
+          if (f.h) el.dataset.fullh = f.h;
           var wanted = url(f.src);
           if (f.screen) {
             el.dataset.full = wanted;
-            if (f.w) el.dataset.fullw = f.w;
-            if (f.h) el.dataset.fullh = f.h;
             wanted = url(f.screen);
           }
           if (n < 2) el.src = wanted; else el.dataset.src = wanted;
@@ -783,6 +790,12 @@
     leafBox.hidden = sheets.length < 2;
     dressLeafButtons();
     turnTo(0, false);
+
+    /* Give the first opening its size now. Every sheet declares one, so
+       this no longer has to wait for a picture — and when the picture
+       does land it measures the same, so nothing moves. */
+    setCeiling();
+    fit(false);
 
     vTitle.textContent = item.title;
     vTally.textContent = pad(at + 1) + ' / ' + pad(items.length);
