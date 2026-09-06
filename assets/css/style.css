@@ -698,12 +698,14 @@ img{ max-width:100%; display:block; }
    as a class that HIDES rather than one that shows: script and stylesheet
    are cached separately, and a visitor holding one old file must still
    see the sheet. Failing open is the whole point of this rule. */
-/* A pending picture with known dimensions paints its alt text inside
-   the box it will fill, so a plate waiting for its cover showed the
-   work's name as raw browser text across the middle of the rail. The
-   text stays for screen readers and for search; it simply stops being
-   drawn. */
-.plate img{ color:transparent; }
+/* A pending or broken picture with known dimensions paints its alt
+   text inside the box it was going to fill — the work's name as raw
+   browser text, across the middle of the rail or of the viewer. The
+   text stays for screen readers and for search; it stops being drawn.
+   The sheet needs this as much as the plate: a scroll that is slow to
+   arrive should show the frame it will fill, not its own title. */
+.plate img,
+.sheet{ color:transparent; }
 
 .leafsheet.is-holding{ opacity:0; }
 

@@ -742,6 +742,15 @@
             if (sheets[leaf] === box) { setCeiling(); fit(false); }
             box.classList.remove('is-holding');
           });
+          /* The reading copy is a generated file. If it is missing, or
+             will not decode, the master it was made from is still
+             there — better a slow sheet than an empty frame. */
+          el.addEventListener('error', function () {
+            if (!el.dataset.full) return;
+            var master = el.dataset.full;
+            delete el.dataset.full;
+            el.src = master;
+          });
           /* The master of a rendered scroll is forty to seventy
              megapixels and ten megabytes. Opening a work used to fetch
              and decode the whole of that before anything appeared. What
