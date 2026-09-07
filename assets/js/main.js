@@ -662,6 +662,13 @@
 
   /* ── opening a work ── */
 
+  /* The address of the work that is open, so it can be sent to
+     somebody: /#works/<name>, and /works/<name>/ as a page of its own.
+     Both are minted at publish from the title. */
+  function addressOf(item) {
+    return item && item.slug ? '/works/' + encodeURIComponent(item.slug) + '/' : '';
+  }
+
   function show(i) {
     at = i; leaf = 0;
     opener = document.activeElement;
@@ -669,6 +676,28 @@
     vitrine.hidden = false;
     requestAnimationFrame(function () { vitrine.classList.add('is-open'); });
     vClose.focus();
+    var here = items[at];
+    if (here && here.slug && history.replaceState) {
+      history.replaceState(null, '', '#works/' + encodeURIComponent(here.slug));
+    }
+  }
+
+  /* Open a work named in the address. It may live in any of the rooms,
+     so the ledger is turned to its own before it is opened. */
+  function openBySlug(slug) {
+    if (!slug) return false;
+    var room, list, i;
+    for (room in works) {
+      list = works[room] || [];
+      for (i = 0; i < list.length; i++) {
+        if (list[i].slug === slug) {
+          if (room !== group) paint(room);
+          show(i);
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   /* ── Openings ─────────────────────────────────────────────────
@@ -987,6 +1016,9 @@
 
   function close() {
     vitrine.classList.remove('is-open');
+    if (history.replaceState && /^#works\//.test(location.hash)) {
+      history.replaceState(null, '', '#works');
+    }
     Array.prototype.forEach.call(canvas.querySelectorAll('video'), function (v) { v.pause(); });
     setTimeout(function () {
       vitrine.hidden = true;
@@ -995,6 +1027,51 @@
       if (opener && opener.focus) opener.focus();
     }, calm ? 0 : 400);
   }
+
+  /* Hand the work's own address to whatever the reader shares with.
+     On a phone that is the system sheet, and so WhatsApp; elsewhere it
+     goes to the clipboard, because there is nowhere else to put it. */
+  var shareBtn = document.getElementById('work-share');
+  var shareSaid = 0;
+  function sayShared(word) {
+    if (!shareBtn) return;
+    shareBtn.classList.add('is-said');
+    shareBtn.textContent = word;
+    clearTimeout(shareSaid);
+    shareSaid = setTimeout(function () {
+      shareBtn.classList.remove('is-said');
+      shareBtn.textContent = T('viewer.share', null, 'Share');
+    }, 2200);
+  }
+  if (shareBtn) shareBtn.addEventListener('click', function () {
+    var here = items[at];
+    var path = addressOf(here);
+    if (!path) return;
+    var link = location.origin + path;
+
+    function toClipboard() {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(link).then(
+          function () { sayShared(T('viewer.shared', null, 'Link copied')); },
+          function () { window.prompt(T('viewer.shareManual', null, 'Copy this link'), link); }
+        );
+        return;
+      }
+      window.prompt(T('viewer.shareManual', null, 'Copy this link'), link);
+    }
+
+    if (navigator.share) {
+      /* The sheet can refuse for reasons that are not a refusal by the
+         reader — a desktop with nothing to share to, a browser that
+         offers the method and not the means. Falling back to the
+         clipboard is better than a button that appears to do nothing.
+         A reader who simply cancels gets the clipboard too, which is
+         no worse than what they asked to leave. */
+      navigator.share({ title: here.title, url: link }).catch(toClipboard);
+      return;
+    }
+    toClipboard();
+  });
 
   var workBack = document.getElementById('work-back');
   var workFwd  = document.getElementById('work-fwd');
@@ -1226,6 +1303,12 @@
   paint('unrolled');
 
   var start = (location.hash || '').replace('#', '');
+  var asked = '';
+  var cut = start.indexOf('/');
+  if (cut !== -1) {
+    try { asked = decodeURIComponent(start.slice(cut + 1)); } catch (e) { asked = start.slice(cut + 1); }
+    start = start.slice(0, cut);
+  }
   if (ROOMS.indexOf(start) === -1) start = 'threshold';
   rooms[start].classList.add('is-open');
   current = start;
@@ -1233,8 +1316,20 @@
   if (links[start]) links[start].classList.add('is-here');
 
 
+  // A work named in the address opens as soon as the rail can find it.
+  if (asked) openBySlug(asked);
+
   window.addEventListener('hashchange', function () {
     var name = (location.hash || '').replace('#', '');
+    var slash = name.indexOf('/');
+    if (slash !== -1) {
+      var slug = name.slice(slash + 1);
+      try { slug = decodeURIComponent(slug); } catch (e) {}
+      name = name.slice(0, slash);
+      if (ROOMS.indexOf(name) !== -1) enter(name, true);
+      if (vitrine.hidden) openBySlug(slug);
+      return;
+    }
     if (ROOMS.indexOf(name) !== -1) enter(name, true);
   });
 })();

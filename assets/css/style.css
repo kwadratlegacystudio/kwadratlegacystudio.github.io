@@ -932,6 +932,21 @@ img{ max-width:100%; display:block; }
   transition:color var(--calm) var(--ease), border-color var(--calm) var(--ease);
 }
 .loupe-reset{ width:auto; padding:0 14px; border-radius:999px; font-size:12px; letter-spacing:.16em; }
+
+/* Sending a work to somebody. Sits in the bar rather than in the loupe,
+   which is hidden for a film — a film is as worth sending as a scroll. */
+.share-btn{
+  appearance:none; cursor:pointer;
+  background:none; border:1px solid var(--line); border-radius:999px;
+  padding:7px 18px;
+  font-family:var(--display);
+  font-size:clamp(12px,.84vw,13px);
+  letter-spacing:.2em; text-transform:uppercase;
+  color:var(--ink-soft);
+  transition:color var(--calm) var(--ease), border-color var(--calm) var(--ease);
+}
+.share-btn:hover,.share-btn:focus-visible{ color:var(--gold); border-color:var(--gold); }
+.share-btn.is-said{ color:var(--gold); border-color:var(--gold); }
 .leaf-step:hover:not([disabled]),.loupe-btn:hover:not([disabled]){ color:var(--gold); border-color:var(--gold); }
 .leaf-step[disabled],.loupe-btn[disabled]{ opacity:.3; cursor:default; }
 
