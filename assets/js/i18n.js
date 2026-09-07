@@ -100,7 +100,7 @@
     'viewer.shareCopy':    ['Copy link', 'העתק לינק', 'קאָפּיע לינק'],
     'viewer.shareMore':    ['More…', 'עוד…', 'נאך…'],
     'viewer.shareSubject': ['{title} | Kwadrat Legacy Studio', '{title} | Kwadrat Legacy Studio', '{title} | Kwadrat Legacy Studio'],
-    'viewer.shareNote':    ['I enjoyed this — I think you will too.', 'אני נהניתי מזה, הנני בטוח שגם מע״כ יהנה מזה', 'איך האב הנאה געהאט דערפון, כ׳בין בין זיכער אז איר וועט אויך הנאה האבן דאס צו זעהן.'],
+    'viewer.shareNote':    ['I enjoyed this — I think you will too.', 'אני נהניתי מזה, הנני בטוח שגם מע״כ יהנה מזה', 'איך האב הנאה געהאט דערפון, כ׳בין זיכער אז איר וועט אויך הנאה האבן דאס צו זעהן.'],
 
     /* ── the standard ───────────────────────────────────────── */
     'std.eyebrow':    ['The Standard', 'דרך המלאכה', 'אונזער מאסשטאב'],
