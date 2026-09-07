@@ -90,6 +90,18 @@
     'viewer.zoomOut': ['Zoom out', 'הקטנה', 'פארקלענערן'],
     'viewer.fitFull': ['Fit to screen', 'התאמה למסך', 'צופאסן צום עקראן'],
 
+    /* ── sending a work to somebody ──────────────────────────── */
+    'viewer.share':        ['Share', 'שתף', 'מיטטיילן'],
+    'viewer.shareLabel':   ['Send this work to somebody', 'שלח עבודה זו למאן דהו', 'שיקט דאס ווערק צו אימיצן'],
+    'viewer.shared':       ['Link copied', 'לינק הועתק', 'לינק קאָפּירט'],
+    'viewer.shareManual':  ['Copy this link', 'העתק לינק', 'קאָפּיע דאס לינק'],
+    'viewer.shareWhatsapp':['WhatsApp', 'וואטסאפ', 'וואטסאפ'],
+    'viewer.shareEmail':   ['Email', 'אימייל', 'אימעיל'],
+    'viewer.shareCopy':    ['Copy link', 'העתק לינק', 'קאָפּיע לינק'],
+    'viewer.shareMore':    ['More…', 'עוד…', 'נאך…'],
+    'viewer.shareSubject': ['{title} | Kwadrat Legacy Studio', '{title} | Kwadrat Legacy Studio', '{title} | Kwadrat Legacy Studio'],
+    'viewer.shareNote':    ['I enjoyed this — I think you will too.', 'אני נהניתי מזה, הנני בטוח שגם מע״כ יהנה מזה', 'איך האב הנאה געהאט דערפון, כ׳בין בין זיכער אז איר וועט אויך הנאה האבן דאס צו זעהן.'],
+
     /* ── the standard ───────────────────────────────────────── */
     'std.eyebrow':    ['The Standard', 'דרך המלאכה', 'אונזער מאסשטאב'],
     'std.head':       ['Documented with responsibility.<br>Finished with permanence.',
