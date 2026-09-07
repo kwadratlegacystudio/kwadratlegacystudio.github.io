@@ -1061,13 +1061,26 @@
     }
 
     if (navigator.share) {
-      /* The sheet can refuse for reasons that are not a refusal by the
-         reader — a desktop with nothing to share to, a browser that
+      /* A share sheet has three fields and the platforms spend them
+         differently. Mail takes the title as the subject line and the
+         text as the body; WhatsApp ignores the title and sets the text
+         above the link. Filling both means an email arrives with a
+         subject worth opening rather than a bare address, and a message
+         reads as though a person sent it — which is what it is.
+
+         The sheet can also refuse for reasons that are not a refusal by
+         the reader: a desktop with nothing to share to, a browser that
          offers the method and not the means. Falling back to the
          clipboard is better than a button that appears to do nothing.
-         A reader who simply cancels gets the clipboard too, which is
-         no worse than what they asked to leave. */
-      navigator.share({ title: here.title, url: link }).catch(toClipboard);
+         A reader who simply cancels gets the clipboard too, which is no
+         worse than what they asked to leave. */
+      navigator.share({
+        title: T('viewer.shareSubject', { title: here.title },
+                 here.title + ' | Kwadrat Legacy Studio'),
+        text:  T('viewer.shareNote', { title: here.title },
+                 'I enjoyed this — I think you will too.'),
+        url:   link
+      }).catch(toClipboard);
       return;
     }
     toClipboard();
