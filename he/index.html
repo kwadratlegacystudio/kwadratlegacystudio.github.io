@@ -519,9 +519,21 @@
 
     <!-- A work can be sent to somebody. The address is its own page,
          which carries its own picture and title into the message. -->
-    <button type="button" class="share-btn" id="work-share"
-            data-i18n="viewer.share" data-i18n-label="viewer.shareLabel"
-            aria-label="Copy a link to this work">Share</button>
+    <div class="share">
+      <button type="button" class="share-btn" id="work-share"
+              data-i18n="viewer.share" data-i18n-label="viewer.shareLabel"
+              aria-haspopup="true" aria-expanded="false"
+              aria-label="Send this work to somebody">Share</button>
+      <!-- Named destinations rather than the system sheet alone. Mail on
+           macOS drops the title the sheet is handed, so an email left
+           that way arrives with no subject; a mailto carries its own. -->
+      <div class="share-menu" id="share-menu" hidden role="menu" aria-label="Send this work">
+        <button type="button" class="share-to" role="menuitem" data-send="whatsapp" data-i18n="viewer.shareWhatsapp">WhatsApp</button>
+        <button type="button" class="share-to" role="menuitem" data-send="email"    data-i18n="viewer.shareEmail">Email</button>
+        <button type="button" class="share-to" role="menuitem" data-send="copy"     data-i18n="viewer.shareCopy">Copy link</button>
+        <button type="button" class="share-to" role="menuitem" data-send="more"     data-i18n="viewer.shareMore" hidden>More&hellip;</button>
+      </div>
+    </div>
 
     <div class="vitrine-works">
       <button type="button" class="work-step" id="work-back" data-i18n-label="viewer.prev" aria-label="Previous work">&#8592;</button>

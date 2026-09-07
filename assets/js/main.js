@@ -1025,6 +1025,7 @@
   }
 
   function close() {
+    shutShareMenu();
     vitrine.classList.remove('is-open');
     if (history.replaceState && /^#works\//.test(location.hash)) {
       history.replaceState(null, '', '#works');
@@ -1038,11 +1039,26 @@
     }, calm ? 0 : 400);
   }
 
-  /* Hand the work's own address to whatever the reader shares with.
-     On a phone that is the system sheet, and so WhatsApp; elsewhere it
-     goes to the clipboard, because there is nowhere else to put it. */
-  var shareBtn = document.getElementById('work-share');
+  /* Sending a work to somebody.
+
+     The system share sheet is offered where it exists, but it cannot be
+     the only way: Mail on macOS ignores the title the sheet hands it, so
+     an email sent that way arrives with an empty subject line. A mailto
+     carries its own subject, and wa.me its own message, so each
+     destination is named and given exactly what it can carry. */
+  var shareBtn  = document.getElementById('work-share');
+  var shareMenu = document.getElementById('share-menu');
   var shareSaid = 0;
+
+  function shareSubject(item) {
+    return T('viewer.shareSubject', { title: item.title },
+             item.title + ' | Kwadrat Legacy Studio');
+  }
+  function shareNote(item) {
+    return T('viewer.shareNote', { title: item.title },
+             'I enjoyed this — I think you will too.');
+  }
+
   function sayShared(word) {
     if (!shareBtn) return;
     shareBtn.classList.add('is-said');
@@ -1053,48 +1069,77 @@
       shareBtn.textContent = T('viewer.share', null, 'Share');
     }, 2200);
   }
-  if (shareBtn) shareBtn.addEventListener('click', function () {
-    var here = items[at];
-    var path = addressOf(here);
-    if (!path) return;
+
+  function shutShareMenu() {
+    if (!shareMenu || shareMenu.hidden) return;
+    shareMenu.hidden = true;
+    shareBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  function sendTo(where) {
+    var item = items[at];
+    var path = addressOf(item);
+    if (!item || !path) return;
     var link = location.origin + path;
+    var note = shareNote(item);
 
-    function toClipboard() {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(link).then(
-          function () { sayShared(T('viewer.shared', null, 'Link copied')); },
-          function () { window.prompt(T('viewer.shareManual', null, 'Copy this link'), link); }
-        );
-        return;
-      }
-      window.prompt(T('viewer.shareManual', null, 'Copy this link'), link);
-    }
-
-    if (navigator.share) {
-      /* A share sheet has three fields and the platforms spend them
-         differently. Mail takes the title as the subject line and the
-         text as the body; WhatsApp ignores the title and sets the text
-         above the link. Filling both means an email arrives with a
-         subject worth opening rather than a bare address, and a message
-         reads as though a person sent it — which is what it is.
-
-         The sheet can also refuse for reasons that are not a refusal by
-         the reader: a desktop with nothing to share to, a browser that
-         offers the method and not the means. Falling back to the
-         clipboard is better than a button that appears to do nothing.
-         A reader who simply cancels gets the clipboard too, which is no
-         worse than what they asked to leave. */
-      navigator.share({
-        title: T('viewer.shareSubject', { title: here.title },
-                 here.title + ' | Kwadrat Legacy Studio'),
-        text:  T('viewer.shareNote', { title: here.title },
-                 'I enjoyed this — I think you will too.'),
-        url:   link
-      }).catch(toClipboard);
+    if (where === 'whatsapp') {
+      window.open('https://wa.me/?text=' + encodeURIComponent(note + '\n' + link),
+                  '_blank', 'noopener');
       return;
     }
-    toClipboard();
-  });
+    if (where === 'email') {
+      // The subject is part of the address here, so it cannot be dropped.
+      location.href = 'mailto:?subject=' + encodeURIComponent(shareSubject(item)) +
+                      '&body=' + encodeURIComponent(note + '\n\n' + link);
+      return;
+    }
+    if (where === 'more' && navigator.share) {
+      navigator.share({ title: shareSubject(item), text: note, url: link })
+               .catch(function () {});
+      return;
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(link).then(
+        function () { sayShared(T('viewer.shared', null, 'Link copied')); },
+        function () { window.prompt(T('viewer.shareManual', null, 'Copy this link'), link); }
+      );
+      return;
+    }
+    window.prompt(T('viewer.shareManual', null, 'Copy this link'), link);
+  }
+
+  if (shareBtn && shareMenu) {
+    // The sheet is worth offering on a phone, where it reaches apps we
+    // cannot name. It is never the only way in.
+    var more = shareMenu.querySelector('[data-send="more"]');
+    if (more && navigator.share) more.hidden = false;
+
+    shareBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var shut = shareMenu.hidden;
+      shareMenu.hidden = !shut;
+      shareBtn.setAttribute('aria-expanded', shut ? 'true' : 'false');
+      if (shut) {
+        var first = shareMenu.querySelector('.share-to:not([hidden])');
+        if (first) first.focus();
+      }
+    });
+
+    Array.prototype.forEach.call(shareMenu.querySelectorAll('.share-to'), function (b) {
+      b.addEventListener('click', function (e) {
+        e.stopPropagation();
+        shutShareMenu();
+        sendTo(b.getAttribute('data-send'));
+      });
+    });
+
+    document.addEventListener('click', shutShareMenu);
+    shareMenu.addEventListener('click', function (e) { e.stopPropagation(); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !shareMenu.hidden) { shutShareMenu(); shareBtn.focus(); }
+    });
+  }
 
   var workBack = document.getElementById('work-back');
   var workFwd  = document.getElementById('work-fwd');
