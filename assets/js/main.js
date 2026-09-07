@@ -115,6 +115,16 @@
     // the arrows must be re-armed then — otherwise they stay disabled from
     // the moment of painting, when nothing was wide enough to scroll.
     img.addEventListener('load', measure);
+    /* One missing width takes the whole picture down: a browser that
+       has chosen a candidate does not try the other when it 404s, and
+       the plate is left empty. Drop back to the single source rather
+       than show nothing. */
+    img.addEventListener('error', function () {
+      if (!img.getAttribute('srcset')) return;
+      img.removeAttribute('srcset');
+      img.removeAttribute('sizes');
+      img.src = url(cover(item));
+    });
     b.appendChild(img);
 
     var cap = document.createElement('span');
