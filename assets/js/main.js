@@ -454,6 +454,9 @@
      image, which is exactly what looks blurry. */
   function setCeiling() {
     var box = sheets[leaf];
+    // A hidden frame measures zero. Keep what is known rather than
+    // replace it with nothing.
+    if (!view.clientWidth || !view.clientHeight) return;
     baseW = baseH = 0;
     if (!box || box.classList.contains('has-film')) { MAX = 7; return; }
 
@@ -684,6 +687,14 @@
     opener = document.activeElement;
     mount();
     vitrine.hidden = false;
+    /* Only now does the frame have a size. mount() measured against a
+       hidden element — clientWidth of nothing — so the sheet was left
+       without dimensions until its picture arrived, and took them all
+       at once under the reader. Measuring here, after the viewer is on
+       the screen and before anything is painted, is the whole point of
+       declaring the sizes in the first place. */
+    setCeiling();
+    fit(false);
     requestAnimationFrame(function () { vitrine.classList.add('is-open'); });
     vClose.focus();
     var here = items[at];
