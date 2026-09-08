@@ -86,8 +86,12 @@
 </header>
 
 <main class="work-page">
-  <img class="work-plate" src="/assets/works/film/_thumbs/2023%20-%20%D7%90%D7%99%D7%A9%20%D7%A9%D7%9C%D7%95%D7%9D.mp4.jpg" width="792" height="1400"
-       alt="2023 - איש שלום" decoding="async">
+  <!-- The picture this page is for, and the thing a visitor is waiting
+       on. fetchpriority tells the browser to want it before anything
+       else on the page; the two widths stop a telephone fetching a
+       desktop-sized one. -->
+  <img class="work-plate" src="/assets/works/film/_thumbs/2023%20-%20%D7%90%D7%99%D7%A9%20%D7%A9%D7%9C%D7%95%D7%9D.mp4.jpg" srcset="/assets/works/film/_thumbs/2023%20-%20%D7%90%D7%99%D7%A9%20%D7%A9%D7%9C%D7%95%D7%9D.mp4-sm.jpg 800w, /assets/works/film/_thumbs/2023%20-%20%D7%90%D7%99%D7%A9%20%D7%A9%D7%9C%D7%95%D7%9D.mp4.jpg 1400w" sizes="(max-width:700px) 92vw, 880px" width="792" height="1400"
+       alt="2023 - איש שלום" decoding="async" fetchpriority="high">
   <p class="work-kind">Film</p>
   <h1 class="grand small" dir="rtl">2023 - איש שלום</h1>
 

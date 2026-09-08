@@ -86,8 +86,12 @@
 </header>
 
 <main class="work-page">
-  <img class="work-plate" src="/assets/works/film/_thumbs/Klein%20Weiss.mp4.jpg" width="787" height="1400"
-       alt="Klein Weiss" decoding="async">
+  <!-- The picture this page is for, and the thing a visitor is waiting
+       on. fetchpriority tells the browser to want it before anything
+       else on the page; the two widths stop a telephone fetching a
+       desktop-sized one. -->
+  <img class="work-plate" src="/assets/works/film/_thumbs/Klein%20Weiss.mp4.jpg" srcset="/assets/works/film/_thumbs/Klein%20Weiss.mp4-sm.jpg 800w, /assets/works/film/_thumbs/Klein%20Weiss.mp4.jpg 1400w" sizes="(max-width:700px) 92vw, 880px" width="787" height="1400"
+       alt="Klein Weiss" decoding="async" fetchpriority="high">
   <p class="work-kind">Film</p>
   <h1 class="grand small">Klein Weiss</h1>
 

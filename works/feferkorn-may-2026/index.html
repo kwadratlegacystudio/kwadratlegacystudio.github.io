@@ -86,8 +86,12 @@
 </header>
 
 <main class="work-page">
-  <img class="work-plate" src="/assets/works/spoken/_thumbs/Feferkorn%20May%202026.mp4.jpg" width="787" height="1400"
-       alt="Feferkorn May 2026" decoding="async">
+  <!-- The picture this page is for, and the thing a visitor is waiting
+       on. fetchpriority tells the browser to want it before anything
+       else on the page; the two widths stop a telephone fetching a
+       desktop-sized one. -->
+  <img class="work-plate" src="/assets/works/spoken/_thumbs/Feferkorn%20May%202026.mp4.jpg" srcset="/assets/works/spoken/_thumbs/Feferkorn%20May%202026.mp4-sm.jpg 800w, /assets/works/spoken/_thumbs/Feferkorn%20May%202026.mp4.jpg 1400w" sizes="(max-width:700px) 92vw, 880px" width="787" height="1400"
+       alt="Feferkorn May 2026" decoding="async" fetchpriority="high">
   <p class="work-kind">Published elsewhere</p>
   <h1 class="grand small">Feferkorn May 2026</h1>
 

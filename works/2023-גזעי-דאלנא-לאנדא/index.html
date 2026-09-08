@@ -86,8 +86,12 @@
 </header>
 
 <main class="work-page">
-  <img class="work-plate" src="/assets/works/sefarim/2023%20-%20%D7%92%D7%96%D7%A2%D7%99%20%D7%93%D7%90%D7%9C%D7%A0%D7%90%20-%20%D7%9C%D7%90%D7%A0%D7%93%D7%90/_thumb.jpg" width="1080" height="1400"
-       alt="2023 - גזעי דאלנא - לאנדא" decoding="async">
+  <!-- The picture this page is for, and the thing a visitor is waiting
+       on. fetchpriority tells the browser to want it before anything
+       else on the page; the two widths stop a telephone fetching a
+       desktop-sized one. -->
+  <img class="work-plate" src="/assets/works/sefarim/2023%20-%20%D7%92%D7%96%D7%A2%D7%99%20%D7%93%D7%90%D7%9C%D7%A0%D7%90%20-%20%D7%9C%D7%90%D7%A0%D7%93%D7%90/_thumb.jpg" srcset="/assets/works/sefarim/2023%20-%20%D7%92%D7%96%D7%A2%D7%99%20%D7%93%D7%90%D7%9C%D7%A0%D7%90%20-%20%D7%9C%D7%90%D7%A0%D7%93%D7%90/_thumb-sm.jpg 800w, /assets/works/sefarim/2023%20-%20%D7%92%D7%96%D7%A2%D7%99%20%D7%93%D7%90%D7%9C%D7%A0%D7%90%20-%20%D7%9C%D7%90%D7%A0%D7%93%D7%90/_thumb.jpg 1400w" sizes="(max-width:700px) 92vw, 880px" width="1080" height="1400"
+       alt="2023 - גזעי דאלנא - לאנדא" decoding="async" fetchpriority="high">
   <p class="work-kind">Yichus sefer</p>
   <h1 class="grand small" dir="rtl">2023 - גזעי דאלנא - לאנדא</h1>
   <p class="work-measure">19 pages</p>

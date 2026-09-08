@@ -86,8 +86,12 @@
 </header>
 
 <main class="work-page">
-  <img class="work-plate" src="/assets/works/photographs/Englander/_thumb.jpg" width="1400" height="747"
-       alt="Englander" decoding="async">
+  <!-- The picture this page is for, and the thing a visitor is waiting
+       on. fetchpriority tells the browser to want it before anything
+       else on the page; the two widths stop a telephone fetching a
+       desktop-sized one. -->
+  <img class="work-plate" src="/assets/works/photographs/Englander/_thumb.jpg" srcset="/assets/works/photographs/Englander/_thumb-sm.jpg 800w, /assets/works/photographs/Englander/_thumb.jpg 1400w" sizes="(max-width:700px) 92vw, 880px" width="1400" height="747"
+       alt="Englander" decoding="async" fetchpriority="high">
   <p class="work-kind">Photographs</p>
   <h1 class="grand small">Englander</h1>
   <p class="work-measure">4 photographs</p>

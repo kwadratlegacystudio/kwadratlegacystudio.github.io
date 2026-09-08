@@ -86,8 +86,12 @@
 </header>
 
 <main class="work-page">
-  <img class="work-plate" src="/assets/works/film/Guttman%20Berkowits/_thumb.jpg" width="787" height="1400"
-       alt="Guttman Berkowits" decoding="async">
+  <!-- The picture this page is for, and the thing a visitor is waiting
+       on. fetchpriority tells the browser to want it before anything
+       else on the page; the two widths stop a telephone fetching a
+       desktop-sized one. -->
+  <img class="work-plate" src="/assets/works/film/Guttman%20Berkowits/_thumb.jpg" srcset="/assets/works/film/Guttman%20Berkowits/_thumb-sm.jpg 800w, /assets/works/film/Guttman%20Berkowits/_thumb.jpg 1400w" sizes="(max-width:700px) 92vw, 880px" width="787" height="1400"
+       alt="Guttman Berkowits" decoding="async" fetchpriority="high">
   <p class="work-kind">Film</p>
   <h1 class="grand small">Guttman Berkowits</h1>
   <p class="work-measure">3 pieces</p>

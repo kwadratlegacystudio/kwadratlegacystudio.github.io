@@ -86,8 +86,12 @@
 </header>
 
 <main class="work-page">
-  <img class="work-plate" src="/assets/works/scrolls/2018%20Gross%20-%201400%20ancestors/_thumb.jpg" width="1400" height="416"
-       alt="2018 Gross - 1400 ancestors" decoding="async">
+  <!-- The picture this page is for, and the thing a visitor is waiting
+       on. fetchpriority tells the browser to want it before anything
+       else on the page; the two widths stop a telephone fetching a
+       desktop-sized one. -->
+  <img class="work-plate" src="/assets/works/scrolls/2018%20Gross%20-%201400%20ancestors/_thumb.jpg" srcset="/assets/works/scrolls/2018%20Gross%20-%201400%20ancestors/_thumb-sm.jpg 800w, /assets/works/scrolls/2018%20Gross%20-%201400%20ancestors/_thumb.jpg 1400w" sizes="(max-width:700px) 92vw, 880px" width="1400" height="416"
+       alt="2018 Gross - 1400 ancestors" decoding="async" fetchpriority="high">
   <p class="work-kind">Lineage scroll</p>
   <h1 class="grand small">2018 Gross - 1400 ancestors</h1>
 
