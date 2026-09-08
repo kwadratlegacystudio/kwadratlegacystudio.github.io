@@ -109,6 +109,9 @@
     }
     img.alt = item.title;
     img.loading = i < 3 ? 'eager' : 'lazy';
+    // The first plate is the largest thing on the page and the head has
+    // already asked for it. Saying so here keeps the two in step.
+    if (i === 0) img.setAttribute('fetchpriority', 'high');
     img.decoding = 'async';
     img.draggable = false;
     // The rail only becomes scrollable once its pictures have arrived, so
