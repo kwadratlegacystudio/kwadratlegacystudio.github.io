@@ -1298,9 +1298,12 @@ html[data-page="document"] .works-index h2{ margin-top:2.6em; }
      the foot of every room does not swallow clicks meant for the work
      behind it. A real link inside it has to ask for them back. */
   pointer-events:auto;
-  /* Its own line under the italic sentence, not trailing off the end
-     of it: this is tracked capitals against an italic serif. */
-  display:block; width:fit-content; margin:7px auto 0;
+  /* Their own line under the italic sentence, not trailing off the end
+     of it: this is tracked capitals against an italic serif. Set inline
+     so that two of them stand side by side and centre together, and
+     fall onto separate lines of their own accord when the foot of a
+     telephone has no room for both. */
+  display:inline-block; margin:7px 0 0;
   font-style:normal;
   font-family:var(--display);
   font-size:clamp(12px,.8vw,13px);
@@ -1310,6 +1313,7 @@ html[data-page="document"] .works-index h2{ margin-top:2.6em; }
   padding-bottom:3px;
   transition:color var(--calm) var(--ease), border-color var(--calm) var(--ease);
 }
+.colophon-link + .colophon-link{ margin-inline-start:clamp(15px,2.4vw,30px); }
 .colophon-link:hover{ color:var(--gold); border-color:var(--gold); }
 
 /* In a room the colophon is pinned to the foot of the viewport. In a
