@@ -533,14 +533,34 @@
      stretches whatever bitmap the browser already rasterised — at fit
      size — so the sharpest source in the world still arrives blurred.
      Setting the width makes it redraw from the original pixels. */
-  function apply(animate) {
+  /* Resizing is right at rest and wrong in the hand. Laying the sheet
+     out again asks the browser to rasterise a seventy-megapixel
+     picture, and doing that on every step of a pinch is the second
+     people were waiting through — Cloudflare put it at 984ms on the
+     mark that covers the artwork.
+
+     So while a gesture is running the sheet keeps the size it has and
+     the difference is carried as a scale on the layer, which the
+     graphics card does for nothing. The moment the hand stops, it is
+     laid out properly at the size it ended on, and redrawn from the
+     original pixels. Sharp at rest, cheap in motion. */
+  var laidAt = 1;          // the scale the sheet is actually laid out at
+
+  function apply(animate, fluid) {
     canvas.classList.toggle('is-live', !animate);
     var box = sheets[leaf];
+    var stretch = 1;
     if (box && baseW) {
-      box.style.width  = Math.round(baseW * scale) + 'px';
-      box.style.height = Math.round(baseH * scale) + 'px';
+      if (fluid && laidAt) {
+        stretch = scale / laidAt;
+      } else {
+        box.style.width  = Math.round(baseW * scale) + 'px';
+        box.style.height = Math.round(baseH * scale) + 'px';
+        laidAt = scale;
+      }
     }
-    canvas.style.transform = 'translate(' + tx + 'px,' + ty + 'px)';
+    canvas.style.transform = 'translate(' + tx + 'px,' + ty + 'px)'
+                           + (stretch === 1 ? '' : ' scale(' + stretch + ')');
     zoomLvl.textContent = Math.round(scale * 100) + '%';
     zoomOut.disabled = scale <= MIN + 0.001;
     zoomIn.disabled  = scale >= MAX - 0.001;
@@ -585,6 +605,16 @@
     guard.style.height = Math.max(0, bottom - top) + 'px';
   }
 
+  /* One lay-out at the end of a gesture, not one per step. */
+  var settleSheet = 0;
+  function settleScale() {
+    clearTimeout(settleSheet);
+    settleSheet = setTimeout(function () {
+      if (Math.abs(scale - laidAt) < 0.0005) return;
+      apply(false);
+    }, 140);
+  }
+
   function fit(animate) { scale = MIN; tx = ty = 0; apply(animate !== false); }
 
   /* Magnify about a point, so the detail under the cursor stays put. */
@@ -599,7 +629,15 @@
     ty = cy - (cy - ty) * k;
     scale = next;
     rein();
-    apply(!!animate);
+    /* A press of the loupe is one step and lays out at once. A wheel or
+       a pinch arrives dozens of times a second: those scale the layer
+       and lay out when the hand stops. */
+    if (animate) {
+      apply(true);
+    } else {
+      apply(false, true);
+      settleScale();
+    }
   }
 
   zoomIn .addEventListener('click', function () { magnify(scale * 1.6, undefined, undefined, true); });
