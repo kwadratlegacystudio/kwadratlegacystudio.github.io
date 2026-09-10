@@ -1,8 +1,0 @@
-# Kwadrat Legacy Studio
-# Everything here may be read, indexed and cited.
-
-User-agent: *
-Allow: /
-Disallow: /_private/
-
-Sitemap: https://kwadratlegacystudio.com/sitemap.xml
