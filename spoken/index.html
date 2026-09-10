@@ -29,12 +29,14 @@
     "hasPart": [
           {
                 "@type": "VideoObject",
-                "name": "Feferkorn May 2026",
+                "name": "וואס איז א מגילת יוחסין? · מגילת יוחסין מהו?",
                 "contentUrl": "https://kwadratlegacystudio.com/assets/works/spoken/Feferkorn%20May%202026.mp4",
                 "about": {
                       "@id": "https://kwadratlegacystudio.com/#studio"
                 },
                 "thumbnailUrl": "https://kwadratlegacystudio.com/assets/works/spoken/Feferkorn%20May%202026.jpg",
+                "uploadDate": "2026-05",
+                "description": "ר׳ יוסף נחמי׳ געבט עס צו פארשטיין · ר׳ יוסף נחמי׳ עם הסבר נפלאה What is a Megillas Yuchsin? Rabbi Yossef Nechemya Kwadrat explains what a lineage scroll is, and what goes into making one.",
                 "width": 787,
                 "height": 1400
           }
@@ -77,6 +79,14 @@
     font-family:var(--display); font-size:clamp(19px,2vw,25px);
     line-height:1.28; color:var(--ink);
   }
+  /* A title card written in Hebrew or Yiddish is set in its own
+     direction. This page has no rail and no viewer, so the switch is
+     safe here — see the note in the stylesheet about why it is not
+     safe everywhere. */
+  .recording-name[dir="rtl"],
+  .recording-when[dir="rtl"],
+  .recording-said[dir="rtl"]{ line-height:1.5; }
+  .recording-name[dir="rtl"]{ font-family:var(--hebrew, var(--display)); }
   .recording-when{
     font-family:var(--display); font-size:clamp(12px,.84vw,13px);
     letter-spacing:.18em; text-transform:uppercase; color:var(--ink-faint);
@@ -118,7 +128,10 @@
       <video controls preload="metadata" playsinline poster="/assets/works/spoken/Feferkorn%20May%202026.jpg" width="787" height="1400">
         <source src="/assets/works/spoken/Feferkorn%20May%202026.mp4" type="video/mp4">
       </video>
-      <span class="recording-name">Feferkorn May 2026</span>
+      <span class="recording-name" dir="rtl">וואס איז א מגילת יוחסין? · מגילת יוחסין מהו?</span>
+      <span class="recording-when" dir="rtl">אייר תשפ״ו לפ״ק · May 2026</span>
+      <p class="recording-said" dir="rtl">ר׳ יוסף נחמי׳ געבט עס צו פארשטיין · ר׳ יוסף נחמי׳ עם הסבר נפלאה</p>
+      <p class="recording-said">What is a Megillas Yuchsin? Rabbi Yossef Nechemya Kwadrat explains what a lineage scroll is, and what goes into making one.</p>
     </li>
   </ul>
 
