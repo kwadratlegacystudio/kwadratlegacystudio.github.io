@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en" data-skin="light" data-page="document">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Legacy Spoken | Kwadrat Legacy Studio</title>
+<meta name="description" content="The studio in its own voice — recordings, interviews and pieces to camera from Kwadrat Legacy Studio, on lineage scrolls, yichus sefarim and the research behind them.">
+<link rel="canonical" href="https://kwadratlegacystudio.com/spoken/">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#F5F1E0">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" sizes="180x180">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+Hebrew:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="/assets/css/style.css?v=0ccfd699">
+
+<!-- Where /press/ carries what other papers wrote, this carries what
+     the studio said itself. Declared as video so that a search engine
+     knows there is something here to watch rather than only to read. -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://kwadratlegacystudio.com/spoken/",
+    "name": "Legacy Spoken | Kwadrat Legacy Studio",
+    "about": { "@id": "https://kwadratlegacystudio.com/#studio" },
+    "publisher": { "@id": "https://kwadratlegacystudio.com/#studio" },
+    "hasPart": [
+          {
+                "@type": "VideoObject",
+                "name": "Feferkorn May 2026",
+                "contentUrl": "https://kwadratlegacystudio.com/assets/works/spoken/Feferkorn%20May%202026.mp4",
+                "about": {
+                      "@id": "https://kwadratlegacystudio.com/#studio"
+                },
+                "thumbnailUrl": "https://kwadratlegacystudio.com/assets/works/spoken/Feferkorn%20May%202026.jpg",
+                "width": 787,
+                "height": 1400
+          }
+    ]
+  }
+</script>
+
+<style>
+  /* One column of recordings. A film here is the studio speaking, so
+     the picture leads and the writing sits under it — the reverse of
+     the press page, where somebody else's sentence is the point. */
+  .spoken-page{ max-width:44rem; margin:0 auto; padding:clamp(28px,7vw,56px) var(--gutter) 96px; }
+  .spoken-page h1{ margin:0 0 10px; }
+  .spoken-lede{
+    color:var(--ink-soft); font-size:clamp(16px,1.15vw,18px);
+    line-height:1.62; margin:0 0 clamp(30px,5vh,48px); max-width:34rem;
+  }
+
+  .recordings{ list-style:none; margin:0; padding:0; display:grid; gap:clamp(26px,4.5vh,44px); }
+
+  .recording{
+    display:grid; gap:14px;
+    padding:clamp(20px,3vw,30px) clamp(20px,3vw,32px);
+    border:1px solid var(--line);
+    background:var(--paper-lift);
+  }
+
+  /* Filmed on a telephone and held upright, so the frame is taller than
+     it is wide. Left to itself that fills the screen and pushes the
+     writing off the foot of it; held to a readable height instead, and
+     centred, so the page still reads as a page. */
+  .recording video{
+    display:block; width:100%; height:auto;
+    max-width:min(100%, 26rem); max-height:72vh;
+    margin:0 auto;
+    background:var(--ink); border:1px solid var(--line);
+  }
+
+  .recording-name{
+    font-family:var(--display); font-size:clamp(19px,2vw,25px);
+    line-height:1.28; color:var(--ink);
+  }
+  .recording-when{
+    font-family:var(--display); font-size:clamp(12px,.84vw,13px);
+    letter-spacing:.18em; text-transform:uppercase; color:var(--ink-faint);
+  }
+  .recording-said{
+    color:var(--ink-soft); font-size:clamp(15px,1.1vw,16.5px);
+    line-height:1.62; max-width:32rem; margin:0;
+  }
+  .recording-said + .recording-said{ margin-top:.9em; }
+
+  .spoken-foot{
+    margin:clamp(32px,5vh,52px) 0 0;
+    color:var(--ink-faint); font-size:clamp(14px,1vw,15px);
+    line-height:1.6; font-style:italic;
+  }
+</style>
+</head>
+<body>
+
+<header class="doc-head">
+  <a class="mark" href="/" aria-label="Kwadrat Legacy Studio">
+    <img src="/assets/img/logo.svg" alt="" class="mark-glyph">
+    <span class="mark-words">
+      <span class="mark-name">Kwadrat</span>
+      <span class="mark-sub">Legacy Studio Ltd</span>
+    </span>
+  </a>
+  <a class="compass-back" href="/">Back to the studio</a>
+</header>
+
+<main class="spoken-page">
+  <h1 class="grand small">Legacy spoken.</h1>
+  <p class="spoken-lede">The work explained in the studio&rsquo;s own voice rather than
+    written about &mdash; what a lineage scroll asks of a family, what the research
+    involves, and what the finished thing is for.</p>
+
+  <ul class="recordings">
+    <li class="recording">
+      <video controls preload="metadata" playsinline poster="/assets/works/spoken/Feferkorn%20May%202026.jpg" width="787" height="1400">
+        <source src="/assets/works/spoken/Feferkorn%20May%202026.mp4" type="video/mp4">
+      </video>
+      <span class="recording-name">Feferkorn May 2026</span>
+    </li>
+  </ul>
+
+  <p class="spoken-foot">What others have written about the studio is gathered separately,
+    <a class="quiet-link" href="/press/">in the press</a>.</p>
+</main>
+
+<div class="colophon">
+  <span>Private Yichus Works &middot; Prepared with precision, documentation, artistry, and care.</span>
+  <small class="colophon-legal" dir="ltr">Kwadrat Legacy Studio Limited &middot; registered in England and Wales, company number 16606965 &middot; registered office 34 Olinda Road, London N16 6TL</small>
+</div>
+
+<!-- Cloudflare Web Analytics: no cookies, no individual tracking, so no
+     consent banner is needed. -->
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "06ee715d06ed43e49515ac223c37f99d"}'></script>
+
+</body>
+</html>

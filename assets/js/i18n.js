@@ -67,7 +67,7 @@
     'hint.motion':    ['Select a project to watch its films.',
                        'בחרו יצירה לצפייה בסרטיה.',
                        'קלייבט א ווערק צו זען די פילם־אויסצוגן.'],
-    'hint.spoken':    ['Interviews, clips, and pieces published elsewhere.',
+    'hint.spoken':    ['Interviews, clips, and the studio speaking for itself.',
                        'ראיונות, קטעי וידאו ופרסומים שהופיעו בבמות אחרות.',
                        'אינטערוויוען, פילם־אויסצוגן און אויסגאבעס וואס זענען ערשינען אויף אנדערע פלעצער.'],
     'works.empty':    ['This portfolio is being prepared.',

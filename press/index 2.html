@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en" data-skin="light" data-page="document">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Legacy in Press | Kwadrat Legacy Studio</title>
+<meta name="description" content="Press coverage of Kwadrat Legacy Studio's lineage scrolls and yichus sefarim, in Matzav, Behadrei Haredim and Ahblick — including the 1,250-ancestor Megillas Yuchsin built into a Lakewood wedding.">
+<link rel="canonical" href="https://kwadratlegacystudio.com/press/">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#F5F1E0">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" sizes="180x180">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+Hebrew:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="/assets/css/style.css?v=0ccfd699">
+
+<!-- The same three articles the front page declares, said again here.
+     A page whose whole subject is the coverage is the plainest place
+     for a machine to learn that the studio named in those articles and
+     this domain are one thing. -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://kwadratlegacystudio.com/press/",
+    "name": "Legacy in Press | Kwadrat Legacy Studio",
+    "about": { "@id": "https://kwadratlegacystudio.com/#studio" },
+    "publisher": { "@id": "https://kwadratlegacystudio.com/#studio" },
+    "hasPart": [
+          {
+                "@type": "NewsArticle",
+                "headline": "Massive Family Tree Tracing Chosson and Kallah to Avrohom Avinu Stuns Guests at Lakewood Wedding",
+                "url": "https://matzav.com/massive-family-tree-tracing-chosson-and-kallah-to-avrohom-avinu-stuns-guests-at-lakewood-wedding/",
+                "about": {
+                      "@id": "https://kwadratlegacystudio.com/#studio"
+                },
+                "datePublished": "2026-08-26",
+                "inLanguage": "en",
+                "publisher": {
+                      "@type": "NewsMediaOrganization",
+                      "name": "Matzav.com",
+                      "url": "https://matzav.com/"
+                }
+          },
+          {
+                "@type": "NewsArticle",
+                "headline": "כזה עוד לא היה: מגילת יוחסין ענקית שהדהימה את האורחים בחתונת בן הנגיד",
+                "url": "https://www.bhol.co.il/news/1737349",
+                "about": {
+                      "@id": "https://kwadratlegacystudio.com/#studio"
+                },
+                "datePublished": "2026-08-26",
+                "inLanguage": "he",
+                "author": {
+                      "@type": "Person",
+                      "name": "משה ויסברג",
+                      "url": "https://www.bhol.co.il/authors/769774"
+                },
+                "publisher": {
+                      "@type": "NewsMediaOrganization",
+                      "name": "בחדרי חרדים",
+                      "url": "https://www.bhol.co.il/",
+                      "alternateName": "Behadrei Haredim"
+                }
+          },
+          {
+                "@type": "NewsArticle",
+                "headline": "1,250 זיידעס אויף איין מגילה: א ריזיגער יחוס בוים ארויסגעלייגט ביי א חסידישע חתונה",
+                "url": "https://ahblicklive.com/post.php?u_id=LXc2qW2QYEXpHvUzHbI",
+                "about": {
+                      "@id": "https://kwadratlegacystudio.com/#studio"
+                },
+                "inLanguage": "yi",
+                "publisher": {
+                      "@type": "NewsMediaOrganization",
+                      "name": "Ahblick Live",
+                      "url": "https://ahblicklive.com/"
+                }
+          }
+    ]
+  }
+</script>
+
+<style>
+  /* One column of notices. Each is somebody else's writing, so the
+     outlet is named first and the studio's own words come last: the
+     page reports the coverage rather than claiming it. */
+  .press-page{ max-width:44rem; margin:0 auto; padding:clamp(28px,7vw,56px) var(--gutter) 96px; }
+  .press-page h1{ margin:0 0 10px; }
+  .press-lede{
+    color:var(--ink-soft); font-size:clamp(16px,1.15vw,18px);
+    line-height:1.62; margin:0 0 clamp(30px,5vh,48px); max-width:34rem;
+  }
+
+  .notices{ list-style:none; margin:0; padding:0; display:grid; gap:clamp(14px,2.4vh,22px); }
+
+  .notice{
+    display:grid; gap:9px;
+    padding:clamp(20px,3vw,30px) clamp(20px,3vw,32px);
+    border:1px solid var(--line);
+    background:var(--paper-lift);
+    text-decoration:none;
+    transition:border-color var(--calm) var(--ease), transform var(--calm) var(--ease);
+  }
+  .notice:hover,
+  .notice:focus-visible{ border-color:var(--gold); transform:translateY(-2px); }
+
+  .notice-outlet{
+    font-family:var(--display);
+    font-size:clamp(11.5px,.8vw,12.5px);
+    letter-spacing:.24em; text-transform:uppercase;
+    color:var(--gold-quiet);
+  }
+  .notice-rule{ width:34px; height:1px; background:var(--gold); opacity:.55; }
+  .notice-head{
+    font-family:var(--display); font-size:clamp(19px,2vw,25px);
+    line-height:1.28; color:var(--ink);
+  }
+  /* A Hebrew or Yiddish headline is set in its own direction. This page
+     has no rail and no viewer, so the switch is safe here. */
+  .notice-head[dir="rtl"]{ font-family:var(--hebrew, var(--display)); line-height:1.4; }
+
+  /* The sentence in which the outlet names the studio. It is quoted
+     because it is the whole reason the notice is listed. */
+  .notice-said{
+    color:var(--ink-soft); font-size:clamp(15px,1.1vw,16.5px);
+    line-height:1.62; max-width:32rem;
+    border-inline-start:2px solid var(--line);
+    padding-inline-start:14px; margin:2px 0 0; font-style:italic;
+  }
+  .notice-when{
+    font-family:var(--display); font-size:clamp(12px,.84vw,13px);
+    letter-spacing:.18em; text-transform:uppercase; color:var(--ink-faint);
+  }
+  .notice-go{
+    font-family:var(--display);
+    font-size:clamp(12px,.84vw,13px);
+    letter-spacing:.22em; text-transform:uppercase;
+    color:var(--ink-faint); margin-top:3px;
+  }
+  .notice:hover .notice-go,
+  .notice:focus-visible .notice-go{ color:var(--gold); }
+
+  .press-aside{
+    margin:clamp(32px,5vh,52px) 0 0; padding-top:clamp(22px,4vh,32px);
+    border-top:1px solid var(--line);
+  }
+  .press-aside h2{
+    font-family:var(--display); font-size:clamp(15px,1.2vw,17px);
+    letter-spacing:.06em; color:var(--ink); margin:0 0 10px;
+  }
+  .press-foot{
+    margin:clamp(28px,4vh,44px) 0 0;
+    color:var(--ink-faint); font-size:clamp(14px,1vw,15px);
+    line-height:1.6; font-style:italic;
+  }
+</style>
+</head>
+<body>
+
+<header class="doc-head">
+  <a class="mark" href="/" aria-label="Kwadrat Legacy Studio">
+    <img src="/assets/img/logo.svg" alt="" class="mark-glyph">
+    <span class="mark-words">
+      <span class="mark-name">Kwadrat</span>
+      <span class="mark-sub">Legacy Studio Ltd</span>
+    </span>
+  </a>
+  <a class="compass-back" href="/">Back to the studio</a>
+</header>
+
+<main class="press-page">
+  <h1 class="grand small">Legacy in press.</h1>
+  <p class="press-lede">In August 2026 a Megillas Yuchsin tracing more than 1,250 ancestors
+    was built into the mechitzah at a Lakewood wedding, and three papers wrote about it in
+    three languages within two days. Their accounts are below, each linked to the original.</p>
+
+  <ul class="notices">
+        <li><a class="notice" href="https://matzav.com/massive-family-tree-tracing-chosson-and-kallah-to-avrohom-avinu-stuns-guests-at-lakewood-wedding/" rel="noopener" target="_blank">
+      <span class="notice-outlet">Matzav.com</span>
+      <span class="notice-rule"></span>
+      <span class="notice-head">Massive Family Tree Tracing Chosson and Kallah to Avrohom Avinu Stuns Guests at Lakewood Wedding</span>
+      <span class="notice-when">August 26, 2026 &middot; English</span>
+      <p class="notice-said">&ldquo;The project was created by Reb Yosef Nechemia HaKohen Kwadrat, an artist and genealogy researcher with Kwadrat Legacy Studio in London.&rdquo;</p>
+      <span class="notice-go">Read it at Matzav.com &rarr;</span>
+    </a></li>
+    <li><a class="notice" href="https://www.bhol.co.il/news/1737349" rel="noopener" target="_blank">
+      <span class="notice-outlet">בחדרי חרדים &middot; Behadrei Haredim</span>
+      <span class="notice-rule"></span>
+      <span class="notice-head" dir="rtl">כזה עוד לא היה: מגילת יוחסין ענקית שהדהימה את האורחים בחתונת בן הנגיד</span>
+      <span class="notice-when">י&quot;ג אלול התשפ&quot;ו · 26.08.26 &middot; Hebrew &middot; משה ויסברג</span>
+      <p class="notice-said" dir="rtl">&ldquo;המיצג, בגודל 3 על 10 מטרים, נעשה על ידי האמן וחוקר היוחסין הרב יוסף נחמיה הכהן קוואדראט מחברת 'Kwadrat Legacy Studio' בלונדון.&rdquo;</p>
+      <span class="notice-go">Read it at Behadrei Haredim &rarr;</span>
+    </a></li>
+    <li><a class="notice" href="https://ahblicklive.com/post.php?u_id=LXc2qW2QYEXpHvUzHbI" rel="noopener" target="_blank">
+      <span class="notice-outlet">Ahblick Live</span>
+      <span class="notice-rule"></span>
+      <span class="notice-head" dir="rtl">1,250 זיידעס אויף איין מגילה: א ריזיגער יחוס בוים ארויסגעלייגט ביי א חסידישע חתונה</span>
+      <span class="notice-when">י&quot;ב אלול תשפ&quot;ו &middot; Yiddish</span>
+      <p class="notice-said" dir="rtl">&ldquo;די הערליכע און קאמפליצירטע ארבעט איז צוזאמגעשטעלט געווארן דורך דעם באקאנטן לאנדאנער אמן ר' יוסף נחמיה הכהן קוואדראט, וועלכער האט ספעציעל אויסגעארבעט דעם הערליכן יחוס בוים לכבוד די גרויסע שמחה.&rdquo;</p>
+      <span class="notice-go">Read it at Ahblick Live &rarr;</span>
+    </a></li>
+  </ul>
+
+  <div class="press-aside">
+    <h2>Written by the studio</h2>
+    <ul class="notices">
+      <li><a class="notice" href="https://lnkd.in/p/eR-K7j-w" rel="noopener" target="_blank">
+        <span class="notice-outlet">LinkedIn</span>
+        <span class="notice-rule"></span>
+        <span class="notice-head">Your Family Tree — Your Heritage at a Glance</span>
+        <span class="notice-when">Yossi Kwadrat</span>
+        <p class="notice-said">This project brought together the two areas at the heart of Kwadrat Legacy Studio: rigorous genealogical research and visual storytelling.</p>
+        <span class="notice-go">Read it on LinkedIn &rarr;</span>
+      </a></li>
+    </ul>
+  </div>
+
+  <p class="press-foot">Press enquiries, and requests for images of a finished work, are
+    welcome through the studio. Photographs of a commission are released only with the
+    family&rsquo;s consent.</p>
+</main>
+
+<div class="colophon">
+  <span>Private Yichus Works &middot; Prepared with precision, documentation, artistry, and care.</span>
+  <small class="colophon-legal" dir="ltr">Kwadrat Legacy Studio Limited &middot; registered in England and Wales, company number 16606965 &middot; registered office 34 Olinda Road, London N16 6TL</small>
+</div>
+
+<!-- Cloudflare Web Analytics: no cookies, no individual tracking, so no
+     consent banner is needed. -->
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "06ee715d06ed43e49515ac223c37f99d"}'></script>
+
+</body>
+</html>
