@@ -1303,7 +1303,7 @@ html[data-page="document"] .works-index h2{ margin-top:2.6em; }
      so that two of them stand side by side and centre together, and
      fall onto separate lines of their own accord when the foot of a
      telephone has no room for both. */
-  display:inline-block; margin:7px 0 0;
+  display:inline-block; margin:0;
   font-style:normal;
   font-family:var(--display);
   font-size:clamp(12px,.8vw,13px);
@@ -1313,6 +1313,10 @@ html[data-page="document"] .works-index h2{ margin-top:2.6em; }
   padding-bottom:3px;
   transition:color var(--calm) var(--ease), border-color var(--calm) var(--ease);
 }
+/* The sentence keeps its own line. It is an italic serif and the ways
+   out are tracked capitals; set inline they run together, which is what
+   happened the moment there were three of them rather than one. */
+.colophon > span{ display:block; margin-top:9px; }
 .colophon-link + .colophon-link{ margin-inline-start:clamp(15px,2.4vw,30px); }
 .colophon-link:hover{ color:var(--gold); border-color:var(--gold); }
 

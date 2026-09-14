@@ -51,9 +51,16 @@
     'works.title':    ['The Works', 'היצירות', 'די ווערק'],
     'tab.unrolled':   ['Legacy Unrolled', 'היחוס הנפרש', 'דער יחוס אנטפלעקט'],
     'tab.bound':      ['Legacy Bound', 'היחוס הכרוך', 'דער יחוס געבינדן'],
-    'tab.hand':       ['Legacy in Hand', 'היצירה מקרוב', 'דאס ווערק פון דער נאענט'],
-    'tab.motion':     ['Legacy in Motion', 'היצירה בתנועה', 'דאס ווערק אין באוועגונג'],
-    'tab.spoken':     ['Legacy Spoken', 'היצירה המסופרת', 'דאס ווערק דערציילט'],
+    'tab.hand':       ['Legacy in Hand', 'היצירה מקרוב', 'אונזערע ווערק פון דער נאענט'],
+    'tab.motion':     ['Legacy in Motion', 'היצירה בתנועה', 'אונזערע ווערק אין באוועגונג'],
+    'tab.spoken':     ['Legacy Spoken', 'היצירה המסופרת', 'אונזערע ווערק דערציילט'],
+
+    /* The three ways out of the foot of the page. Legacy Spoken keeps
+       the words the rail used when it was a room, so the same work is
+       called the same thing wherever it is named. */
+    'way.company':    ['Legacy in Company', 'היצירה בשותפות', 'אונזערע ווערק אין שותפות'],
+    'way.press':      ['Legacy in Press', 'היצירה בעיתונות', 'אונזערע ווערק אין די צייטונגען'],
+    'way.spoken':     ['Legacy Spoken', 'היצירה המסופרת', 'אונזערע ווערק דערציילט'],
 
     'hint.unrolled':  ['Select a scroll to open it, then drag to travel and scroll to magnify.',
                        'בחרו מגילה לפתיחה; גררו כדי לנוע לאורכה וגללו כדי לעיין בפרטיה.',
