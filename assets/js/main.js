@@ -1035,8 +1035,15 @@
       }
     });
 
-    // This opening first, then its neighbours before they are asked for.
-    [n, n - 1, n + 1].forEach(function (i) {
+    /* This opening first, then the ones ahead of it, then the one
+       behind. A sefer was reaching only one opening forward, and its
+       pages run from 47KB to near half a megabyte and take between half
+       a second and a second each — so every turn stopped and waited for
+       a picture that had not been asked for until the moment it was
+       needed. Reading goes forward, so the reach is forward: three
+       ahead and one behind keeps the reader in front of the fetch
+       without pulling down a whole book nobody asked to see. */
+    [n, n + 1, n + 2, n + 3, n - 1].forEach(function (i) {
       var box = sheets[i];
       if (!box) return;
       Array.prototype.forEach.call(box.children, function (el) {
