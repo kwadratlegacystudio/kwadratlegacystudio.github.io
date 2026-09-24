@@ -607,12 +607,12 @@
 
   /* One lay-out at the end of a gesture, not one per step. */
   var settleSheet = 0;
-  function settleScale() {
+  function settleScale(after) {
     clearTimeout(settleSheet);
     settleSheet = setTimeout(function () {
       if (Math.abs(scale - laidAt) < 0.0005) return;
       apply(false);
-    }, 140);
+    }, after || 140);
   }
 
   function fit(animate) { scale = MIN; tx = ty = 0; apply(animate !== false); }
@@ -629,15 +629,18 @@
     ty = cy - (cy - ty) * k;
     scale = next;
     rein();
-    /* A press of the loupe is one step and lays out at once. A wheel or
-       a pinch arrives dozens of times a second: those scale the layer
-       and lay out when the hand stops. */
-    if (animate) {
-      apply(true);
-    } else {
-      apply(false, true);
-      settleScale();
-    }
+    /* However it was asked for — a hand on the glass or a press of the
+       loupe — the sheet is stretched on the layer first, which the
+       graphics card does for nothing, and laid out properly once it has
+       come to rest.
+
+       The press used to lay out at once, on the reasoning that one step
+       deserves one lay-out. On a seventy-megapixel scroll that step was
+       measured at 704ms of the reader's waiting, which is not a step.
+       The settle waits out the transition before it redraws, so the
+       sharpening is never seen to happen. */
+    apply(animate, true);
+    settleScale(animate ? 1180 : 140);
   }
 
   zoomIn .addEventListener('click', function () { magnify(scale * 1.6, undefined, undefined, true); });
@@ -753,6 +756,10 @@
       list = works[room] || [];
       for (i = 0; i < list.length; i++) {
         if (list[i].slug === slug) {
+          /* Already the work on screen — someone following a link to
+             the very thing they are looking at. Leave it where they
+             have it rather than snapping back to the first page. */
+          if (!vitrine.hidden && items[at] && items[at].slug === slug) return true;
           if (room !== group) paint(room);
           show(i);
           return true;
@@ -1447,7 +1454,10 @@
       try { slug = decodeURIComponent(slug); } catch (e) {}
       name = name.slice(0, slash);
       if (ROOMS.indexOf(name) !== -1) enter(name, true);
-      if (vitrine.hidden) openBySlug(slug);
+      /* Whether or not the viewer is already up. It used to open only
+         from a closed one, so a link to a second scroll, followed while
+         the first was open, did nothing at all. */
+      openBySlug(slug);
       return;
     }
     if (ROOMS.indexOf(name) !== -1) enter(name, true);
