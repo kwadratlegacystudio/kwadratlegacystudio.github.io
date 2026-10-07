@@ -461,14 +461,15 @@
     // replace it with nothing.
     if (!view.clientWidth || !view.clientHeight) return;
     baseW = baseH = 0;
-    if (!box || box.classList.contains('has-film')) { MAX = 7; return; }
+    if (!box) { MAX = 7; return; }
+    var film = box.classList.contains('has-film');
 
     // Natural size of the whole opening: pages laid side by side, brought
     // to a common height.
     // A sheet counts once it knows its size, whether because the
     // picture has arrived or because the manifest declared it.
     var imgs = Array.prototype.filter.call(box.children, function (el) {
-      return el.tagName === 'IMG' &&
+      return (el.tagName === 'IMG' || el.tagName === 'VIDEO') &&
              (el.naturalWidth || (+el.dataset.fullw && +el.dataset.fullh));
     });
     if (!imgs.length) { MAX = 7; return; }
@@ -502,6 +503,12 @@
     if (imgs.length === 1 && imgs[0].dataset.full && baseW) {
       CAP = (imgs[0].naturalWidth / baseW) / dpr;
     }
+
+    /* A film is watched, not magnified. It was never magnifiable in
+       practice — with no base size the zoom did nothing to it — so the
+       ceiling is held at the floor, which disables both buttons rather
+       than letting the base size it now has grow under them. */
+    if (film) { MAX = MIN; CAP = 0; }
   }
 
   /* Fetch the master, once, and swap it in only when it has arrived —
@@ -831,9 +838,11 @@
              Without it the video is nought by nought until its poster
              arrives and then snaps to the poster's shape, which is a
              layout shift of about 0.25 on a metric where 0.1 is the
-             limit. The attributes only give the browser the ratio to
-             reserve; the stylesheet still decides the drawn size. */
-          if (f.w && f.h) { el.width = f.w; el.height = f.h; }
+             limit. It goes on the dataset, not on width and height
+             attributes: the stylesheet sets both to auto, which beats
+             an attribute, so the attributes would reserve nothing. */
+          if (f.w) el.dataset.fullw = f.w;
+          if (f.h) el.dataset.fullh = f.h;
           if (f.poster) el.poster = url(f.poster);
           if (n === 0) el.src = url(f.src); else el.dataset.src = url(f.src);
           box.classList.add('has-film');
