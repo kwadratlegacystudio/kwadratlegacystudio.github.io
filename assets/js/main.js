@@ -827,6 +827,13 @@
           el.playsInline = true;
           el.setAttribute('controlsList', 'nodownload noplaybackrate');
           el.disablePictureInPicture = true;
+          /* A film declares its size for the same reason a sheet does.
+             Without it the video is nought by nought until its poster
+             arrives and then snaps to the poster's shape, which is a
+             layout shift of about 0.25 on a metric where 0.1 is the
+             limit. The attributes only give the browser the ratio to
+             reserve; the stylesheet still decides the drawn size. */
+          if (f.w && f.h) { el.width = f.w; el.height = f.h; }
           if (f.poster) el.poster = url(f.poster);
           if (n === 0) el.src = url(f.src); else el.dataset.src = url(f.src);
           box.classList.add('has-film');
